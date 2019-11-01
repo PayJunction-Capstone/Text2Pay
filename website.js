@@ -7,10 +7,6 @@ var path = __dirname + '/MDB/';
 app.use('/',router);
   
 router.get('/',function(req, res){
-  res.sendFile(path + 'index.html');
-});
-  
-router.get('/home',function(req, res){
   res.sendFile(path + 'home.html');});
   
 router.get('/login',function(req, res){
