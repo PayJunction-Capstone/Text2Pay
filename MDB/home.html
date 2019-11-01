@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<style>
+/* The side navigation menu */
+.sidenav {
+  height: 100%; /* 100% Full-height */
+  width: 0; /* 0 width - change this with JavaScript */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Stay on top */
+  top: 0; /* Stay at the top */
+  left: 0;
+  background-color: #111; /* Black*/
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 60px; /* Place content 60px from the top */
+  transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+}
+
+/* The navigation menu links */
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+/* Position and style the close button (top right corner) */
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#main {
+  transition: margin-left .5s;
+  padding: 20px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+</style>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Material Design Bootstrap</title>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <!-- Bootstrap core CSS -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link href="css/mdb.min.css" rel="stylesheet">
+  <!-- Your custom styles (optional) -->
+  <link href="css/style.css" rel="stylesheet">
+</head>
+
+
+
+
+
+
+
+
+
+<body>
+  <!-- Start your project here-->
+  <div id="mySidenav" class="sidenav" style="margin-top:72px">
+    <div>
+      
+      <a href="#" style= " font-size:18px; margin-top: -30px; margin-left: 10px;">Home</a>
+    </div>
+    <a href="#" style= "margin-top: 10px;font-size:18px;margin-left: 10px;">Groups</a>
+    <a href="#" style= "margin-top: 10px;font-size:18px;margin-left: 10px;">History</a>
+    <a href="#" style= "margin-top: 10px;font-size:18px;margin-left: 10px;">Incomplete</a>
+  </div>
+  <!--Navbar-->
+<nav class="navbar navbar-expand-lg navbar-dark info-color">
+  
+  
+  <!-- Navbar brand -->
+  <a href="#" id="tabsButton" data-activates="slide-out" class="p-3 button-collapse" style="color:#f1f1f1" onclick="moveTabs()"><i
+    class="fas fa-bars"></i></a>
+  <a class="navbar-brand" href="#" style="font-size:25px;">&nbsp&nbsp&nbspPayJunction</a>
+  
+  <div class="collapse navbar-collapse" id="basicExampleNav">
+
+      <!-- Links -->
+      <ul class="navbar-nav mr-auto">
+          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" style="margin-left:170px; width:650px">
+      </ul>
+  <form class="form-inline">
+    <div class="md-form my-0">
+      <img  src="/Users/benliu/Downloads/notification.png" alt="Card image cap"style="width:22px;height:22px;border-radius:11px;margin-left: -50px">
+    </div>
+    <div class="md-form my-0">
+        <img  src="/Users/benliu/Downloads/benliu.png" alt="Card image cap"style="width:44px;height:44px;border-radius:22px;" data-toggle="dropdown">
+        
+        <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink" style="margin-left:-250px;margin-top:14px;width:300px">
+            <div class="card-body" >
+                <img  src="/Users/benliu/Downloads/benliu.png" alt="Card image cap"style="width:50px;height:50px;border-radius:25px;margin-top: -25px;margin-left: 25px" data-toggle="dropdown">
+                <!-- Title -->
+                <div style="display:inline-block">
+                  <h4 class="card-title" style = "font-size:16px;margin-left: 15px;">Benjamin Liu</h4>
+                  <!-- Text -->
+                  <p class="card-text" style = "font-size:15px; margin-left: 15px; margin-top: -10px">@bliu00 </p>
+                </div>
+                <hr>
+                <h4 class="card-text" style = "font-size:15px;text-align: center;">$573.29 in PayJunction</h4>
+                <!-- Button -->
+                <a href="#" class="btn btn-info" style = "left:50%;margin-left:-80px; width:160px;color:#ffffff">Transfer Funds</a>
+                <hr>
+        
+        
+            </div>
+            <a class="dropdown-item" href="#" style="margin-left: 15px; margin-top: -30px; width: 270px">My Account</a>
+            <a class="dropdown-item" href="#" style="margin-left: 15px; width: 270px">Settings</a>
+            <a class="dropdown-item" href="#" style="margin-left: 15px; width: 270px">Help</a>
+            <a class="dropdown-item" href="#" style="margin-left: 15px; width: 270px">Sign Out</a>
+        </div>
+
+    </div>
+  </form>
+  
+</nav>
+
+<!--/.Navbar-->
+  <!-- <button type="button" class="btn btn-primary">Primary</button>
+  <button type="button" class="btn btn-secondary">Secondary</button>
+  <button type="button" class="btn btn-success">Success</button>
+  <button type="button" class="btn btn-danger">Danger</button>
+  <button type="button" class="btn btn-warning">Warning</button>
+  <button type="button" class="btn btn-info">Info</button>
+  <button type="button" class="btn btn-light">Light</button>
+  <button type="button" class="btn btn-dark">Dark</button>
+  <button type="button" class="btn btn-link">Link</button> -->
+  <!-- Start your project here-->
+  <div id="main">
+    <!-- Card 1-->
+    <div class="card" style="width:220px;height:300px;margin-left:20px;margin-top:20px;display: inline-block;">
+
+      <!-- Card image -->
+      <div class="view overlay" >
+        <img class="card-img-top" src="/Users/benliu/Downloads/howardlin.png" alt="Card image cap"style="width:100px;height:100px;border-radius:75px;margin-top:20px;left:50%;margin-left:-50px;">
+        <a href="#!">
+          <div class="mask rgba-white-slight"></div>
+        </a>
+      </div>
+
+      <!-- Card content -->
+      <div class="card-body" style="width:220px;height:150px;" >
+
+        <!-- Title -->
+        <h4 class="card-title" style = "font-size:15px;text-align: center;">Howard Lin</h4>
+        <!-- Text -->
+        <p class="card-text" style = "font-size:13px;">@howardli requests $32.50 for Grand Potato.</p>
+        <!-- Button -->
+        <a href="pay.html" class="btn btn-info" style = "left:50%;margin-left:-90px; width:180px;">Pay Now</a>
+
+
+      </div>
+
+  </div>
+  <!-- Card 2-->
+  <div class="card" style="width:220px;height:300px;margin-left:20px;margin-top:20px;display: inline-block; ">
+
+    <!-- Card image -->
+    <div class="view overlay" >
+      <img class="card-img-top" src="/Users/benliu/Downloads/joanneli.png" alt="Card image cap"style="width:100px;height:100px;border-radius:75px;margin-top:20px;left:50%;margin-left:-50px;">
+      <a href="#!">
+        <div class="mask rgba-white-slight"></div>
+      </a>
+    </div>
+
+    <!-- Card content -->
+    <div class="card-body" style="width:220px;height:150px;" >
+
+      <!-- Title -->
+      <h4 class="card-title" style = "font-size:15px;text-align: center;">Joanne Li</h4>
+      <!-- Text -->
+      <p class="card-text" style = "font-size:13px;">@joanneli requests $199.00 for MBD Pro Plz.</p>
+      <!-- Button -->
+      <a href="#" class="btn btn-info" style = "left:50%;margin-left:-90px; width:180px">Pay Now</a>
+
+
+    </div>
+
+  </div>
+  <!-- Card 3-->
+<div class="card" style="width:220px;height:300px;margin-left:20px;margin-top:20px;display: inline-block; ">
+
+    <!-- Card image -->
+    <div class="view overlay" >
+      <img class="card-img-top" src="/Users/benliu/Downloads/junayed.png" alt="Card image cap"style="width:100px;height:100px;border-radius:75px;margin-top:20px;left:50%;margin-left:-50px;">
+      <a href="#!">
+        <div class="mask rgba-white-slight"></div>
+      </a>
+    </div>
+
+    <!-- Card content -->
+    <div class="card-body" style="width:220px;height:150px;" >
+
+      <!-- Title -->
+      <h4 class="card-title" style = "font-size:15px;text-align: center;">Junayed Naushad</h4>
+      <!-- Text -->
+      <p class="card-text" style = "font-size:13px;">@junayednaushad requests $4.20 for Dank.</p>
+      <!-- Button -->
+      <a href="#" class="btn btn-info" style = "left:50%;margin-left:-90px; width:180px">Pay Now</a>
+
+
+    </div>
+
+  </div>
+  <!-- Card 4-->
+<div class="card" style="width:220px;height:300px;margin-left:20px;margin-top:20px;display: inline-block; ">
+
+    <!-- Card image -->
+    <div class="view overlay" >
+      <img class="card-img-top" src="/Users/benliu/Downloads/julialiu.png" alt="Card image cap"style="width:100px;height:100px;border-radius:75px;margin-top:20px;left:50%;margin-left:-50px;">
+      <a href="#!">
+        <div class="mask rgba-white-slight"></div>
+      </a>
+    </div>
+
+    <!-- Card content -->
+    <div class="card-body" style="width:220px;height:150px;" >
+
+      <!-- Title -->
+      <h4 class="card-title" style = "font-size:15px;text-align: center;">Julia Liu</h4>
+      <!-- Text -->
+      <p class="card-text" style = "font-size:13px;">@julialiu requests $28.89 for suushii.</p>
+      <!-- Button -->
+      <a href="#" class="btn btn-info" style = "left:50%;margin-left:-90px; width:180px">Pay Now</a>
+
+
+    </div>
+
+  </div>
+</div>
+
+  <!-- SCRIPTS -->
+  <!-- JQuery -->
+  <script type="text/javascript" src="js/jquery-3.4.1.min.js">
+  </script>
+ 
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript" src="js/popper.min.js"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="js/mdb.min.js"></script>
+</body>
+
+</html>
+
+<script>
+function moveTabs() {
+  if (tabsButton.value == "False" || (tabsButton.value!="False" && tabsButton.value!="True")) {
+    document.getElementById("mySidenav").style.width = "225px";
+    document.getElementById("main").style.marginLeft = "225px";
+    tabsButton.value = "True";
+  } else {
+    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("main").style.marginLeft = "0";
+    tabsButton.value = "False";
+  }
+}
+</script>
