@@ -60,7 +60,7 @@ button:hover {
   padding: 10px 18px;
   background-color: #D3D3D3;
   border-radius:5px;
-  
+
 
 }
 
@@ -84,18 +84,18 @@ span.psw {
 }
 
 h3 {
-   width: 100%; 
-   text-align: center; 
+   width: 100%;
+   text-align: center;
    color: #696969;
    font-size: 15px;
-   border-bottom: 1px solid #D3D3D3; 
+   border-bottom: 1px solid #D3D3D3;
    line-height: 0.1em;
-   margin: 10px 0 20px; 
-} 
+   margin: 10px 0 20px;
+}
 
-h3 span { 
-    background:#fff; 
-    padding:0 10px; 
+h3 span {
+    background:#fff;
+    padding:0 10px;
 }
 
 /* Change styles for span and cancel button on extra small screens */
@@ -113,24 +113,24 @@ h3 span {
 </head>
 <body>
 
-<form action="pages/homepage.html" method="post"> 
+<form action="pages/homepage.html" method="post">
   <div class="imgcontainer">
     <img src="payjunction-ecommerce.png" alt="Logo" class="logo" style="width:230.7px; height: 155.3px;">
   </div>
   <div class="container">
     <!--<label for="uname"><b>Username</b></label>-->
-    <input type="text" placeholder="Email or mobile number" name="uname" required style= "border-radius:5px">  
+    <input type="text" placeholder="Email or mobile number" name="uname" required style= "border-radius:5px">
 
     <input type="password" placeholder="Password" name="psw" required style= "border-radius:5px">
-  
-    <button type="submit" style= "border-radius:5px">Log In</button >
+
+    <button type="text" style= "border-radius:5px">Log In</button >
     <label>
       <input type="checkbox" checked="checked" name="remember"> Remember me
     </label>
     <h3><span>or</span></h3>
   </div>
   <div class="container" >
-    <button type="button" class="signupbtn" >Sign Up</button>
+    <button type="button" class="signupbtn" id="signup" onclick="googleSignIn()" >Sign Up</button>
 
   <div class="container" style="position: absolute; left: 50%; margin-left:-370px;">
     <span class="psw">Forgot <A HREF="html/forgotpw.html">password?</a></span>
@@ -140,6 +140,7 @@ h3 span {
 </body>
 </html>
 </div>
+
   <!-- End your project here-->
 
   <!-- SCRIPTS -->
@@ -155,3 +156,30 @@ h3 span {
 </body>
 
 </html>
+
+<script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
+
+<script>
+  var config = {
+    apiKey: "AIzaSyCri31YveE6WMCjfA9UMJH7-NdVU1ZJbu8",
+    authDomain: "payjunction-4be6a.firebaseapp.com",
+    databaseURL: "https://payjunction-4be6a.firebaseio.com",
+    projectId: "payjunction-4be6a",
+    storageBucket: "payjunction-4be6a.appspot.com",
+    messagingSenderId: "199914665361",
+  };
+  firebase.initializeApp(config);
+
+  const auth = firebase.auth();
+  const db = firebase.firestore();
+
+  db.settings({timestampsInSnapshots: true});
+</script>
+
+<script>
+function googleSignIn() {
+  document.getElementByID("signup").style.color = "red";
+}
+</script>
