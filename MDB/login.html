@@ -123,7 +123,8 @@ h3 span {
 
     <input type="password" placeholder="Password" name="psw" required style= "border-radius:5px">
 
-    <button type="text" style= "border-radius:5px">Log In</button >
+    <button type="submit" style= "border-radius:5px">Log In</button >
+
     <label>
       <input type="checkbox" checked="checked" name="remember"> Remember me
     </label>
@@ -131,6 +132,9 @@ h3 span {
   </div>
   <div class="container" >
     <button type="button" class="signupbtn" id="signup" onclick="googleSignIn()" >Sign Up</button>
+    <a id="tester" href="#" class="btn btn-info" onclick="testerFunc()">something</a>
+	<a id="pay" href="#" class="btn btn-info" style = "left:50%;margin-left:-175px; width:350px;height:65px;font-size:16px;padding-top: 22px;margin-top:10px" onclick="fadeButton()"> Pay Now</a>
+	<a id="googleSignIn" onclick="callGoogleSignIn()">Google Sign In Mother FUcker</a>
 
   <div class="container" style="position: absolute; left: 50%; margin-left:-370px;">
     <span class="psw">Forgot <A HREF="html/forgotpw.html">password?</a></span>
@@ -152,16 +156,11 @@ h3 span {
   <script type="text/javascript" src="js/bootstrap.min.js"></script>
   <!-- MDB core JavaScript -->
   <script type="text/javascript" src="js/mdb.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
 
-</body>
-
-</html>
-
-<script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
-
-<script>
+  <script> 
   var config = {
     apiKey: "AIzaSyCri31YveE6WMCjfA9UMJH7-NdVU1ZJbu8",
     authDomain: "payjunction-4be6a.firebaseapp.com",
@@ -172,14 +171,44 @@ h3 span {
   };
   firebase.initializeApp(config);
 
+
   const auth = firebase.auth();
   const db = firebase.firestore();
 
   db.settings({timestampsInSnapshots: true});
-</script>
+
+  </script>
+</body>
+
+</html>
 
 <script>
-function googleSignIn() {
-  document.getElementByID("signup").style.color = "red";
-}
+      function callGoogleSignIn(){
+          var provider = new firebase.auth.GoogleAuthProvider();
+          firebase.auth().signInWithPopup(provider).then(function(result) {
+               // This gives you a Google Access Token. You can use it to access the Google API.
+                var token = result.credential.accessToken;
+               // The signed-in user info.
+               var user = result.user;
+               // ...
+         }).catch(function(error) {
+             // Handle Errors here.
+               var errorCode = error.code;
+               var errorMessage = error.message;
+               // The email of the user's account used.
+               var email = error.email;
+               // The firebase.auth.AuthCredential type that was used.
+               var credential = error.credential;
+            // ...
+         });
+      }
+</script>
+
+
+
+<script>
+  function fadeButton(){
+    document.getElementById("pay").textContent ="Payment Complete";
+    document.getElementById("pay").style.marginTop = "-200px";
+  }
 </script>
