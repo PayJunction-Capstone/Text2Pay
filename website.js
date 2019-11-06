@@ -1,13 +1,33 @@
 var express = require('express');
 var app = express();
 var router = express.Router();
+
+/*var assert = require('assert');
+var jsdom = require('mocha-jsdom');
+
+global.document = jsdom();
+*/
   
 var path = __dirname + '/MDB/';
   
 app.use('/',router);
+app.use(express.static(path + 'pay.html'));
   
 router.get('/',function(req, res){
-  res.sendFile(path + 'home.html');});
+  res.sendFile(path + 'home.html');
+
+  /*var button = document.getElementById('payHoward')
+  button.onClick = function(res,req) {
+    router.get('/pay', function(req, res, next) {
+      res.sendFile(path + 'pay.html')
+    });
+  }
+  */
+});
+
+router.post('/', (req,res) => {
+  res.redirect('pay')
+});
   
 router.get('/login',function(req, res){
   res.sendFile(path + 'login.html');
@@ -15,6 +35,10 @@ router.get('/login',function(req, res){
 
 router.get('/forgot',function(req, res){
     res.sendFile(path + 'forgotpw.html');
+});
+
+router.get('/pay',function(req, res){
+  res.sendFile(path + 'pay.html');
 });
   
 app.use('*',function(req, res){
