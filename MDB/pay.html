@@ -166,11 +166,13 @@
         <!-- Text -->
         <p class="card-text" style = "font-size:16px;text-align: center;margin-top: 25px;">@howardli requests $32.50 for Grand Potato.</p>
         <!-- Button -->
-        <a href="#" class="btn btn-light" style = "left:50%;margin-left:-175px; width:350px;height:65px;font-size:16px;padding-top: 22px;margin-top: 25px;"> No Thanks</a>
+        <a id="decline" href="#" class="btn btn-light" style = "left:50%;margin-left:-175px; width:350px;height:65px;font-size:16px;padding-top: 22px;margin-top: 15px;"> No Thanks</a>
+        <a id="card" href="#" class="btn btn-light" style = "left:50%;margin-left:-360px; width:350px;height:65px;font-size:14px;padding-top: 37px;margin-top: 15px;display: inline-block;opacity: 0;">PayJunction balance:<br/><div style="color:#818181;margin-top:10px;font-size:16px">$573.29</div></a>
         <br /> 
-        <a href="#" class="btn btn-info" style = "left:50%;margin-left:-175px; width:350px;height:65px;font-size:16px;padding-top: 22px;margin-top:10px"> Pay Now</a>
+        <a id="pay" href="#" class="btn btn-info" style = "left:50%;margin-left:-175px; width:350px;height:65px;font-size:16px;padding-top: 22px;margin-top:10px" onclick="fadeButton()"> Pay Now</a>
+        <a id="return" href="home.html" class="btn btn-light" style = "left:50%;margin-left:-175px; width:350px;height:65px;font-size:16px;padding-top: 22px;margin-top: -80px;visibility: hidden;"> Return to Home</a>
         <br />
-        <p class="card-text" style = "font-size:14px;text-align: center;margin-top: 15px;">Think there was a mistake?&nbsp <a href="#" class="link" style = "width:250px;height:35px;font-size:14px;"> Report your error</a></p>
+        <p id="report" class="card-text" style = "font-size:14px;text-align: center;margin-top: 15px;">Think there was a mistake?&nbsp <a href="#" class="link" style = "width:250px;height:35px;font-size:14px;"> Report your error</a></p>
         
 
       </div>
@@ -202,6 +204,24 @@ function moveTabs() {
     document.getElementById("mySidenav").style.width = "0";
     document.getElementById("main").style.marginLeft = "0";
     tabsButton.value = "False";
+  }
+}
+function fadeButton(){
+  if(document.getElementById("pay").temp==false)
+  {
+    document.getElementById("pay").textContent ="Payment Complete";
+    document.getElementById("card").style.opacity = "0";
+    document.getElementById("pay").style.marginTop = "-200px";
+    document.getElementById("return").style.visibility = "visible";
+  }
+  else{
+    document.getElementById("decline").style.opacity = "0";document.getElementById("report").style.opacity = "0";
+    document.getElementById("card").style.opacity = "100";
+    document.getElementById("card").style.height = "125px";
+    document.getElementById("pay").textContent = "Confirm Payment";
+    document.getElementById("pay").className =" btn btn-success";
+    document.getElementById("pay").style.marginLeft = "55px";
+    document.getElementById("pay").temp=false;
   }
 }
 </script>
