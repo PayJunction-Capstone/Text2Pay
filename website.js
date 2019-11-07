@@ -52,7 +52,22 @@ router.get('/pay',function(req, res){
 router.get('/css/*', function(req, res) {
   res.sendFile(path + req.url)
 })
-  
+
+router.get('/pics/*', function(req, res) {
+  res.sendFile(path + req.url)
+})
+
+router.get('/js/*', function(req, res) {
+  res.sendFile(path + req.url)
+})
+
+router.get('/img/*', function(req, res) {
+  res.sendFile(path + req.url)
+})
+
+router.get('/font/*', function(req, res) {
+  res.sendFile(path + req.url)
+})
 /*
 app.use('*',function(req, res){
   res.send('Error 404: Not Found!');
