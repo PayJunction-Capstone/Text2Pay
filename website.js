@@ -13,7 +13,7 @@ app.use('/',router);
 app.use(express.static(path + 'pay.html'));
 
 router.get('/',function(req, res){
-  res.sendFile(path + 'home.html');
+  res.sendFile(path + 'login.html');
 
   /*var button = document.getElementById('payHoward')
   button.onClick = function(res,req) {
