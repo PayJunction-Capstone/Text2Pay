@@ -25,8 +25,16 @@ router.get('/',function(req, res){
   */
 });
 
+router.get('/home',function(req, res){
+  res.sendFile(path + 'home.html');
+});
+
 router.post('/', (req,res) => {
-  res.redirect('pay')
+  res.redirect('/pay')
+});
+
+router.post('/pay', (req,res) => {
+  res.redirect('/home')
 });
   
 router.get('/login',function(req, res){
@@ -40,10 +48,16 @@ router.get('/forgot',function(req, res){
 router.get('/pay',function(req, res){
   res.sendFile(path + 'pay.html');
 });
+
+router.get('/css/*', function(req, res) {
+  res.sendFile(path + req.url)
+})
   
+/*
 app.use('*',function(req, res){
   res.send('Error 404: Not Found!');
 });
+*/
   
 app.listen(3000,function(){
   console.log("Server running at Port 3000");

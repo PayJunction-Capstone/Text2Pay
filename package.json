@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "express": "^4.17.1",
     "firebase": "^7.2.1",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
@@ -28,5 +29,21 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "description": "A secure and efficient application that allows consumers and merchants to complete transactions through the consumer's phone, via SMS, email, or QR code, rather than using a credit card terminal.",
+  "main": "website.js",
+  "devDependencies": {
+    "mocha-jsdom": "^2.0.0",
+    "nodemon": "^1.19.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PayJunction-Capstone/Text2Pay.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PayJunction-Capstone/Text2Pay/issues"
+  },
+  "homepage": "https://github.com/PayJunction-Capstone/Text2Pay#readme"
 }
