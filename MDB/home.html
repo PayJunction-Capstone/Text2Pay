@@ -79,7 +79,7 @@
   <!-- Start your project here-->
   <div id="mySidenav" class="sidenav" style="margin-top:72px">
     <div>
-      
+
       <a href="#" style= " font-size:18px; margin-top: -30px; margin-left: 10px;">Home</a>
     </div>
     <a href="#" style= "margin-top: 10px;font-size:18px;margin-left: 10px;">Groups</a>
@@ -88,13 +88,13 @@
   </div>
   <!--Navbar-->
 <nav class="navbar navbar-expand-lg navbar-dark info-color">
-  
-  
+
+
   <!-- Navbar brand -->
   <a href="#" id="tabsButton" data-activates="slide-out" class="p-3 button-collapse" style="color:#f1f1f1" onclick="moveTabs()"><i
     class="fas fa-bars"></i></a>
   <a class="navbar-brand" href="#" style="font-size:25px;">&nbsp&nbsp&nbspPayJunction</a>
-  
+
   <div class="collapse navbar-collapse" id="basicExampleNav">
 
       <!-- Links -->
@@ -107,7 +107,7 @@
     </div>
     <div class="md-form my-0">
         <img  src="/Users/benliu/Downloads/benliu.png" alt="Card image cap"style="width:44px;height:44px;border-radius:22px;" data-toggle="dropdown">
-        
+
         <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink" style="margin-left:-250px;margin-top:14px;width:300px">
             <div class="card-body" >
                 <img  src="/Users/benliu/Downloads/benliu.png" alt="Card image cap"style="width:50px;height:50px;border-radius:25px;margin-top: -25px;margin-left: 25px" data-toggle="dropdown">
@@ -122,18 +122,18 @@
                 <!-- Button -->
                 <a href="#" class="btn btn-info" style = "left:50%;margin-left:-80px; width:160px;color:#ffffff">Transfer Funds</a>
                 <hr>
-        
-        
+
+
             </div>
             <a class="dropdown-item" href="#" style="margin-left: 15px; margin-top: -30px; width: 270px">My Account</a>
             <a class="dropdown-item" href="#" style="margin-left: 15px; width: 270px">Settings</a>
             <a class="dropdown-item" href="#" style="margin-left: 15px; width: 270px">Help</a>
-            <a class="dropdown-item" href="#" style="margin-left: 15px; width: 270px">Sign Out</a>
+            <a class="dropdown-item" href="login.html" style="margin-left: 15px; width:270px" onclick="signOut()">Sign out</a>
         </div>
 
     </div>
   </form>
-  
+
 </nav>
 
 <!--/.Navbar-->
@@ -254,16 +254,43 @@
   <!-- JQuery -->
   <script type="text/javascript" src="js/jquery-3.4.1.min.js">
   </script>
- 
+
   <!-- Bootstrap tooltips -->
   <script type="text/javascript" src="js/popper.min.js"></script>
   <!-- Bootstrap core JavaScript -->
   <script type="text/javascript" src="js/bootstrap.min.js"></script>
   <!-- MDB core JavaScript -->
   <script type="text/javascript" src="js/mdb.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
+
+  <script>
+  var config = {
+    apiKey: "AIzaSyCri31YveE6WMCjfA9UMJH7-NdVU1ZJbu8",
+    authDomain: "payjunction-4be6a.firebaseapp.com",
+    databaseURL: "https://payjunction-4be6a.firebaseio.com",
+    projectId: "payjunction-4be6a",
+    storageBucket: "payjunction-4be6a.appspot.com",
+    messagingSenderId: "199914665361",
+    appId: "1:199914665361:web:1879621121a23682711630",
+    measurementId: "G-L3XRQM049H"
+  };
+  firebase.initializeApp(config);
+</script>
+
 </body>
 
 </html>
+<script>
+function signOut(){
+  firebase.auth().signOut().then(function() {
+    // Sign-out successful.
+  }).catch(function(error) {
+    // An error happened.
+  });
+}
+</script>
 
 <script>
 function moveTabs() {
