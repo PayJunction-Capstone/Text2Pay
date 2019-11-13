@@ -246,11 +246,13 @@ function onBuyClicked() {
       }
   }];
 
+  var val = '32.50'
+
   // Checkout details
   var details = {
     total: {
       label: 'Total due',
-      amount: { currency: 'USD', value : '32.50' }
+      amount: { currency: 'USD', value : val }
     }
   };
 
@@ -261,6 +263,7 @@ function onBuyClicked() {
   request.show()
   // 3. Process the payment
   .then(result => {
+    console.log('result is: ' , result)
     // POST the payment information to the server
     return fetch('/pay', {
       method: 'POST',
@@ -268,7 +271,7 @@ function onBuyClicked() {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(result.toJSON())
+      body: JSON.stringify({...result.toJSON(),...{amountBase:val}})
     }).then(response => {
       // 4. Display payment results
       if (response.status === 200) {

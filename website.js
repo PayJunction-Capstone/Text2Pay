@@ -1,4 +1,6 @@
 var express = require('express');
+const https = require('https');
+var bodyParser = require('body-parser')
 var app = express();
 var router = express.Router();
 
@@ -9,8 +11,12 @@ global.document = jsdom();
 
 var path = __dirname + '/MDB/';
 
+app.use(express.json())
 app.use('/',router);
 app.use(express.static(path + 'pay.html'));
+
+//app.use(bodyParser.json())
+//app.use(bodyParser.urlencoded({ extended: true }))
 
 router.get('/',function(req, res){
   res.sendFile(path + 'login.html');
@@ -32,8 +38,56 @@ router.post('/', (req,res) => {
   res.redirect('/pay')
 });
 
+//curl -X POST -u "pj-ql-01:pj-ql-01p" -H "Accept: application/json" -H "X-PJ-Application-Key: c98a331b-e7a7-4e64-b34c-134bfb406a30"     -d "cardNumber=444433332222111"     -d "cardExpMonth=01"     -d "cardExpYear=2020" -d "cardCvv=999"    -d "amountBase=2.00" "https://api.payjunctionlabs.com/transactions"
+
+
+
 router.post('/pay', (req,res) => {
-  res.redirect('/home')
+  //res.redirect('/home')
+
+  console.log(req)
+
+  
+  const data = {
+    cardNumber:req.body.details.cardNumber,
+    cardExpMonth:req.body.details.expiryMonth,
+    cardExpYear:req.body.details.expiryYear,
+    cardCvv:req.body.details.cardSecurityCode,
+    amountBase:req.body.amountBase
+  }
+
+var data1 = toURLcode(data)
+
+const options = {
+  hostname: 'api.payjunctionlabs.com',
+  port: 443,
+  path: '/transactions',
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded',
+    'Content-Length': data1.length,
+    'X-PJ-Application-Key': 'c98a331b-e7a7-4e64-b34c-134bfb406a30',
+    'Authorization': 'Basic ' + new Buffer('julialiu16 ' + ':' + 'Jubiepie716!').toString('base64')
+  }
+}
+
+const req1 = https.request(options, res => {
+  console.log(`statusCode: ${res.statusCode}`)
+
+  res.on('data', d => {
+    process.stdout.write(d)
+  })
+})
+
+req1.on('error', error => {
+  console.error(error)
+})
+
+console.log(data1)
+
+req1.write(data1)
+req1.end()
+res.sendStatus(200)
 });
 
 router.get('/login',function(req, res){
@@ -76,3 +130,13 @@ app.use('*',function(req, res){
 app.listen(3000,function(){
   console.log("Server running at Port 3000");
 });
+
+function toURLcode(obj) {
+  var str = [];
+    for (var key in obj) {
+         if (obj.hasOwnProperty(key)) {
+               str.push(encodeURIComponent(key) + "=" + encodeURIComponent(obj[key]))                  
+         }
+    }
+    return str.join("&");
+}
