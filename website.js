@@ -56,38 +56,38 @@ router.post('/pay', (req,res) => {
     amountBase:req.body.amountBase
   }
 
-var data1 = toURLcode(data)
+  var data1 = toURLcode(data)
 
-const options = {
-  hostname: 'api.payjunctionlabs.com',
-  port: 443,
-  path: '/transactions',
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/x-www-form-urlencoded',
-    'Content-Length': data1.length,
-    'X-PJ-Application-Key': 'c98a331b-e7a7-4e64-b34c-134bfb406a30',
-    'Authorization': 'Basic ' + new Buffer('julialiu16 ' + ':' + 'Jubiepie716!').toString('base64')
+  const options = {
+    hostname: 'api.payjunctionlabs.com',
+    port: 443,
+    path: '/transactions',
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Content-Length': data1.length,
+      'X-PJ-Application-Key': 'c98a331b-e7a7-4e64-b34c-134bfb406a30',
+      'Authorization': 'Basic ' + new Buffer('julialiu16 ' + ':' + 'Jubiepie716!').toString('base64')
+    }
   }
-}
 
-const req1 = https.request(options, res => {
-  console.log(`statusCode: ${res.statusCode}`)
+  const req1 = https.request(options, res => {
+    console.log(`statusCode: ${res.statusCode}`)
 
-  res.on('data', d => {
-    process.stdout.write(d)
+    res.on('data', d => {
+      process.stdout.write(d)
+    })
   })
-})
 
-req1.on('error', error => {
-  console.error(error)
-})
+  req1.on('error', error => {
+    console.error(error)
+  })
 
-console.log(data1)
+  console.log(data1)
 
-req1.write(data1)
-req1.end()
-res.sendStatus(200)
+  req1.write(data1)
+  req1.end()
+  res.sendStatus(200)
 });
 
 router.get('/login',function(req, res){
