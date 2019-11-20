@@ -47,7 +47,7 @@ router.post('/pay', (req,res) => {
 
   console.log(req)
 
-  
+
   const data = {
     cardNumber:req.body.details.cardNumber,
     cardExpMonth:req.body.details.expiryMonth,
@@ -135,7 +135,7 @@ function toURLcode(obj) {
   var str = [];
     for (var key in obj) {
          if (obj.hasOwnProperty(key)) {
-               str.push(encodeURIComponent(key) + "=" + encodeURIComponent(obj[key]))                  
+               str.push(encodeURIComponent(key) + "=" + encodeURIComponent(obj[key]))
          }
     }
     return str.join("&");
