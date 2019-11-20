@@ -152,7 +152,17 @@ h3 span {
 </body>
 
 </html>
+
 <script>
+
+function validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+}
+function validatePhone(phone){
+  var re = /[0-9]{10}/;
+  return re.test(String(phone));
+}
 function saveInfo(){
   var db = firebase.firestore()
   var username = document.getElementById("username").value;
@@ -160,25 +170,25 @@ function saveInfo(){
   var lastname=document.getElementById("lastname").value;
   var email=document.getElementById("email").value;
   var phone=document.getElementById("phone").value;
-  // const username = document.querySelector("#username").value;
-  // const firstname = document.querySelector("#firstname").value;// it takes the values from signup page.
-  // const lastname = document.querySelector("#lastname").value;
-  // const email = document.querySelector("#email").value;
-  // const phonenumber = document.querySelector("#phone").value;
-  // const save=document.querySelector("#submit");\
-  db.collection("users").add({
-    Username:username,
-    FirstName:firstname,
-    LastName:lastname,
-    Email:email,
-    PhoneNumber:phone
 
-  }).then(function(docRef) {
-    console.log("Document written with ID: ", docRef.id);
-    window.location = 'home';
-})
-.catch(function(error) {
-    console.error("Error adding document: ", error);
-});
+  if(username != "" && firstname != "" && lastname != "" && validateEmail(email) == true && validatePhone(phone) == true)
+  {
+    db.collection("users").add({
+      Username:username,
+      FirstName:firstname,
+      LastName:lastname,
+      Email:email,
+      PhoneNumber:phone
+    }).then(function(docRef) {
+        console.log("Document written with ID: ", docRef.id);
+        window.location = 'home';
+    })
+    .catch(function(error) {
+        console.error("Error adding document: ", error);
+    });
+  }
+  else{
+    console.log("invalid input");
+  }
 }
 </script>
