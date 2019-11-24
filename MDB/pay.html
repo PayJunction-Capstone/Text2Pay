@@ -263,7 +263,7 @@ function onBuyClicked() {
   request.show()
   // 3. Process the payment
   .then(result => {
-    console.log('result is: ' , result)
+    //console.log('result is: ' , result)
     // POST the payment information to the server
     return fetch('/pay', {
       method: 'POST',
@@ -286,5 +286,5 @@ function onBuyClicked() {
     });
   });
 }
-document.querySelector('#start').addEventListener('click', onBuyClicked);
+//document.querySelector('#start').addEventListener('click', onBuyClicked);
 </script>

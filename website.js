@@ -34,6 +34,10 @@ router.get('/addinfo',function(req, res){
   res.sendFile(path + 'addinfo.html');
 });
 
+router.get('/request',function(req, res){
+  res.sendFile(path + 'request.html');
+});
+
 router.get('/home',function(req, res){
   res.sendFile(path + 'home.html');
 });
@@ -87,7 +91,7 @@ router.post('/pay', (req,res) => {
     console.error(error)
   })
 
-  console.log(data1)
+  //console.log(data1)
 
   req1.write(data1)
   req1.end()
@@ -105,6 +109,11 @@ router.get('/forgot',function(req, res){
 router.get('/pay',function(req, res){
   res.sendFile(path + 'pay.html');
 });
+ /*
+router.get('/checkout', function(req, res) {
+  res.sendFile(path + req.url)
+})
+*/
 
 router.get('/css/*', function(req, res) {
   res.sendFile(path + req.url)
@@ -125,6 +134,7 @@ router.get('/img/*', function(req, res) {
 router.get('/font/*', function(req, res) {
   res.sendFile(path + req.url)
 })
+
 /*
 app.use('*',function(req, res){
   res.send('Error 404: Not Found!');
