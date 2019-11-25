@@ -42,12 +42,18 @@ router.post('/', (req,res) => {
   res.redirect('/pay')
 });
 
+
+const uuidv4 = require('uuid/v4');
+uuidv4(); // ⇨ '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'
 //curl -X POST -u "pj-ql-01:pj-ql-01p" -H "Accept: application/json" -H "X-PJ-Application-Key: c98a331b-e7a7-4e64-b34c-134bfb406a30"     -d "cardNumber=444433332222111"     -d "cardExpMonth=01"     -d "cardExpYear=2020" -d "cardCvv=999"    -d "amountBase=2.00" "https://api.payjunctionlabs.com/transactions"
 
 
 
-router.post('/pay', (req,res) => {
+router.post('/pay/:uuidTemp', (req,res) => {
   //res.redirect('/home')
+
+  
+  console.log(req.params.uuidTemp)
 
   console.log(req)
 
@@ -102,7 +108,13 @@ router.get('/forgot',function(req, res){
     res.sendFile(path + 'forgotpw.html');
 });
 
-router.get('/pay',function(req, res){
+
+router.get('/request',function(req, res){
+  res.sendFile(path + 'request.html');
+});
+
+router.get('/pay/:uuidTemp',function(req, res){
+  console.log(req.params)
   res.sendFile(path + 'pay.html');
 });
 
