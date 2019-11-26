@@ -164,7 +164,7 @@ function validatePhone(phone){
   return re.test(String(phone));
 }
 function saveInfo(){
-  var db = firebase.firestore()
+  var db = firebase.firestore();
   var username = document.getElementById("username").value;
   var firstname=document.getElementById("firstname").value;
   var lastname=document.getElementById("lastname").value;

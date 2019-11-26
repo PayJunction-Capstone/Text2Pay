@@ -230,6 +230,26 @@ function createRequest(){
   }
 
 }
+
+function getPaymentRequest(paymentRequestID){
+  var db = firebase.firestore();
+  db.collection("paymentRequests").where("PaymentRequestID", "==", paymentRequestID)
+    .get()
+    .then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            // doc.data() is never undefined for query doc snapshots
+            requestData = doc.data();
+            amount = requestData.PaymentAmount;
+            phoneNumber = requestData.PhoneNumber; 
+            console.log("amount: ", amount, "phone number: ", phoneNumber);
+        });
+    })
+    .catch(function(error) {
+        console.log("Error getting documents: ", error);
+    });
+}
+getPaymentRequest("potatooo");
+
 function moveTabs() {
   if (tabsButton.value == "False" || (tabsButton.value!="False" && tabsButton.value!="True")) {
     document.getElementById("mySidenav").style.width = "225px";
