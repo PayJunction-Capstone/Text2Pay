@@ -104,6 +104,10 @@ router.get('/login',function(req, res){
   res.sendFile(path + 'login.html');
 });
 
+router.get('/signup',function(req, res){
+  res.sendFile(path + 'signup.html');
+});
+
 router.get('/forgot',function(req, res){
     res.sendFile(path + 'forgotpw.html');
 });
