@@ -36,6 +36,7 @@
   "description": "A secure and efficient application that allows consumers and merchants to complete transactions through the consumer's phone, via SMS, email, or QR code, rather than using a credit card terminal.",
   "main": "website.js",
   "devDependencies": {
+    "express": "^4.17.1",
     "mocha-jsdom": "^2.0.0",
     "nodemon": "^1.19.4"
   },
