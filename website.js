@@ -45,11 +45,11 @@ router.get('/pay/home',function(req, res){
 });
 
 router.get('/pay',function(req, res){
-  res.redirect('/pay/potatooo')
+  res.redirect('/pay/b55141d8-b954-4940-a2d2-e4297a1c21f1')
 });
 
 router.get('/pay/pay',function(req, res){
-  res.redirect('/pay/potatooo')
+  res.redirect('/pay/b55141d8-b954-4940-a2d2-e4297a1c21f1')
 });
 
 router.get('/pay/login',function(req, res){
