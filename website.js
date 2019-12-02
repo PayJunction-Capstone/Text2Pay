@@ -44,8 +44,12 @@ router.get('/pay/home',function(req, res){
   res.sendFile(path + 'home.html');
 });
 
-router.post('/', (req,res) => {
-  res.redirect('/pay/:uuidTemp')
+router.get('/pay',function(req, res){
+  res.redirect('/pay/potatooo')
+});
+
+router.get('/pay/login',function(req, res){
+  res.sendFile(path + 'login.html')
 });
 
 
@@ -120,7 +124,17 @@ router.get('/request',function(req, res){
   res.sendFile(path + 'request.html');
 });
 
-router.get('/pay/:uuidCode',function(req, res){
+router.get('/pay/request',function(req, res){
+  res.sendFile(path + 'request.html');
+});
+
+
+// just added this for fakehome.html
+router.get('/pay/home2',function(req, res){
+  res.sendFile(path + 'home2.html');
+});
+
+router.get('/pay/potatooo',function(req, res){
   res.sendFile(path + 'pay.html');
 });
 
