@@ -48,6 +48,10 @@ router.get('/pay',function(req, res){
   res.redirect('/pay/potatooo')
 });
 
+router.get('/pay/pay',function(req, res){
+  res.redirect('/pay/potatooo')
+});
+
 router.get('/pay/login',function(req, res){
   res.redirect('/login')
 });
@@ -133,6 +137,7 @@ router.get('/pay/request',function(req, res){
 router.get('/pay/home2',function(req, res){
   res.sendFile(path + 'home2.html');
 });
+
 
 router.get('/pay/potatooo',function(req, res){
   res.sendFile(path + 'pay.html');
