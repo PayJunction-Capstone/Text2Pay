@@ -210,6 +210,9 @@
 </html>
 
 <script>
+  var currentUUID = window.location.href.substring(window.location.href.lastIndexOf('/') + 1);
+  console.log("THE MY VAR IS: "+ currentUUID);
+
   function getPaymentRequest(paymentRequestID){
   var db = firebase.firestore();
   db.collection("paymentRequests").where("PaymentRequestID", "==", paymentRequestID)
@@ -220,15 +223,16 @@
             requestData = doc.data();
             amount = requestData.PaymentAmount;
             phoneNumber = requestData.PhoneNumber; 
+            description = requestData.RequestDescription;
             console.log("amount: ", amount, "phone number: ", phoneNumber);
-            document.getElementById("description").textContent = "@woodstockspizza requests "+ amount+ " for 16\" X-Large Cheese Pizza."; // person + " requests " + amount + " for " + description;
+            document.getElementById("description").textContent = "@woodstockspizza requests "+ amount+ " for "+ description; 
         });
     })
     .catch(function(error) {
         console.log("Error getting documents: ", error);
     });
 }
-getPaymentRequest("1fc7586f-ddf1-43f8-b217-5b1e9b15c476");
+getPaymentRequest(currentUUID);
 function moveTabs() {
   if (tabsButton.value == "False" || (tabsButton.value!="False" && tabsButton.value!="True")) {
     document.getElementById("mySidenav").style.width = "225px";
@@ -299,7 +303,7 @@ function onBuyClicked() {
   .then(result => {
     console.log('result is: ' , result)
     // POST the payment information to the server
-    return fetch('/pay', {
+    return fetch('/pay/'+currentUUID, {
       method: 'POST',
       credentials: 'include',
       headers: {

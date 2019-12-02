@@ -120,8 +120,7 @@ router.get('/request',function(req, res){
   res.sendFile(path + 'request.html');
 });
 
-router.get('/pay/:uuidTemp',function(req, res){
-  //console.log(req.params)
+router.get('/pay/:uuidCode',function(req, res){
   res.sendFile(path + 'pay.html');
 });
 
