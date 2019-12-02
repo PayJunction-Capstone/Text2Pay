@@ -49,7 +49,7 @@ router.get('/pay',function(req, res){
 });
 
 router.get('/pay/login',function(req, res){
-  res.sendFile(path + 'login.html')
+  res.redirect('/login')
 });
 
 
