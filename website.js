@@ -139,7 +139,7 @@ router.get('/pay/home2',function(req, res){
 });
 
 
-router.get('/pay/potatooo',function(req, res){
+router.get('/pay/b55141d8-b954-4940-a2d2-e4297a1c21f1',function(req, res){
   res.sendFile(path + 'pay.html');
 });
 
