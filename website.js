@@ -129,7 +129,7 @@ router.get('/request',function(req, res){
 });
 
 router.get('/pay/request',function(req, res){
-  res.sendFile(path + 'request.html');
+  res.redirect('/request');
 });
 
 
