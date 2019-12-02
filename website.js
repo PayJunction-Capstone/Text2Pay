@@ -48,6 +48,10 @@ router.get('/pay',function(req, res){
   res.redirect('/pay/potatooo')
 });
 
+router.get('/pay/login',function(req, res){
+  res.sendFile(path + 'login.html')
+});
+
 
 const uuidv4 = require('uuid/v4');
 uuidv4(); // ⇨ '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'
@@ -126,8 +130,8 @@ router.get('/pay/request',function(req, res){
 
 
 // just added this for fakehome.html
-router.get('/pay/fakehome',function(req, res){
-  res.sendFile(path + 'fakehome.html');
+router.get('/pay/home2',function(req, res){
+  res.sendFile(path + 'home2.html');
 });
 
 router.get('/pay/potatooo',function(req, res){
