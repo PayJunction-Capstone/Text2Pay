@@ -228,7 +228,7 @@
         console.log("Error getting documents: ", error);
     });
 }
-getPaymentRequest("4a9037e2-049a-4faf-91a5-2d0f9f112f9e");
+getPaymentRequest("1fc7586f-ddf1-43f8-b217-5b1e9b15c476");
 function moveTabs() {
   if (tabsButton.value == "False" || (tabsButton.value!="False" && tabsButton.value!="True")) {
     document.getElementById("mySidenav").style.width = "225px";
@@ -280,7 +280,7 @@ function onBuyClicked() {
       }
   }];
 
-  var val = '23.20'//REPLACE WITH AMOUNT FROM GETPAYMENT REQ
+  var val = amount;//REPLACE WITH AMOUNT FROM GETPAYMENT REQ
 
   // Checkout details
   var details = {

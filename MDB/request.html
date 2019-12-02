@@ -153,17 +153,18 @@
      
 
       <!-- Card content -->
-      <div class="card-body" style="width:500px;height:200px;" >
+      <div class="card-body" style="width:500px;height:250px;" >
 
         <!-- Title -->
-        <h1 class="card-title" style = "font-size:21px;text-align: center;margin-top: 35px;">Create Request Link</h1>
+        <h1 class="card-title" style = "font-size:21px;text-align: center;margin-top: 30px;">Create Request Link</h1>
         <!-- Text -->
-        <p class="card-text" style = "font-size:16px;text-align: center;margin-top: 30px;">Please enter an amount you wish to request.</p>
-        <input id="paymentAmount" type="text" placeholder="Request Amount" name="uname" required style= "border-radius:5px;width: 80%; padding: 12px 20px; margin: 8px 0;margin-top: 12px; display: inline-block; border: 1px solid #ccc; box-sizing: border-box;margin-left: 45px;">
-        <input id="phoneNumber" type="text" placeholder="Phone Number" name="uname" required style= "border-radius:5px;width: 80%; padding: 12px 20px; margin: 12px 0;  display: inline-block; border: 1px solid #ccc; box-sizing: border-box;margin-left: 45px;">
+        <p class="card-text" style = "font-size:16px;text-align: center;margin-top: 25px;">Please enter an amount you wish to request.</p>
+        <input id="paymentAmount" type="text" placeholder="Request Amount" name="uname" required style= "border-radius:5px;width: 80%; padding: 12px 20px; margin: 8px 0;margin-top: 8px; display: inline-block; border: 1px solid #ccc; box-sizing: border-box;margin-left: 45px;">
+        <input id="phoneNumber" type="text" placeholder="Phone Number" name="uname" required style= "border-radius:5px;width: 80%; padding: 12px 20px; margin: 12px 0; margin-top:8px; display: inline-block; border: 1px solid #ccc; box-sizing: border-box;margin-left: 45px;">
+        <input id="requestDescription" type="text" placeholder="Description" name="uname" required style= "border-radius:5px;width: 80%; padding: 12px 20px; margin: 12px 0; margin-top:8px; display: inline-block; border: 1px solid #ccc; box-sizing: border-box;margin-left: 45px;">
         <!-- Button -->
         <br /> 
-        <a id="pay" href="#" class="btn btn-info" style = "left:50%;margin-left:-175px; width:350px;height:65px;font-size:16px;padding-top: 22px;margin-top:20px" onclick="createRequest()" >Send Request</a>
+        <a id="pay" href="#" class="btn btn-info" style = "left:50%;margin-left:-175px; width:350px;height:65px;font-size:16px;padding-top: 22px;margin-top:10px" onclick="createRequest()" >Send Request</a>
         <a id="return" href="home" class="btn btn-light" style = "left:50%;margin-left:-175px; width:350px;height:65px;font-size:16px;padding-top: 22px;margin-top: -80px;visibility: hidden;"> Return to Home</a>
       </div>
   </div>
@@ -214,21 +215,20 @@ function uuidv4() {
   return uuidTemp;
 }
 
-console.log(uuidv4());
-
-
 function createRequest(){
   var db = firebase.firestore()
   
   var paymentAmount = document.getElementById("paymentAmount").value;
   var phoneNumber = document.getElementById("phoneNumber").value;
+  var requestDescription = document.getElementById("requestDescription").value;
   var paymentRequestID = uuidv4();
   if(paymentAmount != "" && phoneNumber != "" && paymentRequestID != "" )
   {
     db.collection("paymentRequests").add({
       PaymentAmount: paymentAmount,
       PhoneNumber: phoneNumber,
-      PaymentRequestID: paymentRequestID
+      PaymentRequestID: paymentRequestID,
+      RequestDescription: requestDescription
     }).then(function(docRef) {
         console.log("Document written with ID: ", docRef.id);
     })

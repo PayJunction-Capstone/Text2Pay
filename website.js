@@ -40,6 +40,10 @@ router.get('/home',function(req, res){
   res.sendFile(path + 'home.html');
 });
 
+router.get('/pay/home',function(req, res){
+  res.sendFile(path + 'home.html');
+});
+
 router.post('/', (req,res) => {
   res.redirect('/pay/:uuidTemp')
 });
