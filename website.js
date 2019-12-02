@@ -52,6 +52,10 @@ router.get('/pay/pay',function(req, res){
   res.redirect('/pay/b55141d8-b954-4940-a2d2-e4297a1c21f1')
 });
 
+router.get('/pay/:uuidTemp',function(req, res){
+  res.sendFile(path + 'pay.html')
+});
+
 router.get('/pay/login',function(req, res){
   res.redirect('/login')
 });
