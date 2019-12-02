@@ -41,7 +41,7 @@ router.get('/home',function(req, res){
 });
 
 router.post('/', (req,res) => {
-  res.redirect('/pay')
+  res.redirect('/pay/:uuidTemp')
 });
 
 
@@ -53,8 +53,8 @@ uuidv4(); // ⇨ '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'
 
 router.post('/pay/:uuidTemp', (req,res) => {
   //res.redirect('/home')
-  console.log(req.params.uuidTemp)
-  console.log(req)
+  //console.log(req.params.uuidTemp)
+  //console.log(req)
 
 
   const data = {
@@ -81,7 +81,7 @@ router.post('/pay/:uuidTemp', (req,res) => {
   }
 
   const req1 = https.request(options, res => {
-    console.log(`statusCode: ${res.statusCode}`)
+    //console.log(`statusCode: ${res.statusCode}`)
 
     res.on('data', d => {
       process.stdout.write(d)
@@ -92,7 +92,7 @@ router.post('/pay/:uuidTemp', (req,res) => {
     console.error(error)
   })
 
-  console.log(data1)
+  //console.log(data1)
 
   req1.write(data1)
   req1.end()
@@ -101,6 +101,10 @@ router.post('/pay/:uuidTemp', (req,res) => {
 
 router.get('/login',function(req, res){
   res.sendFile(path + 'login.html');
+});
+
+router.get('/signup',function(req, res){
+  res.sendFile(path + 'signup.html');
 });
 
 router.get('/forgot',function(req, res){
@@ -113,16 +117,14 @@ router.get('/request',function(req, res){
 });
 
 router.get('/pay/:uuidTemp',function(req, res){
-  console.log(req.params)
-  console.log(req.url)
-  console.log(path)
+  //console.log(req.params)
   res.sendFile(path + 'pay.html');
 });
 
 router.get('/css/*', function(req, res) {
-  console.log(req.url)
-  console.log(path)
+  //console.log(req.params)
   res.sendFile(path + req.url)
+  //console.log(req)
 })
 
 router.get('/pics/*', function(req, res) {
