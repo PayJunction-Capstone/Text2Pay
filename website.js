@@ -1,8 +1,10 @@
+
 var express = require('express');
 const https = require('https');
 var bodyParser = require('body-parser')
 var app = express();
 var router = express.Router();
+
 
 /*var assert = require('assert');
 var jsdom = require('mocha-jsdom');
@@ -51,10 +53,7 @@ uuidv4(); // ⇨ '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'
 
 router.post('/pay/:uuidTemp', (req,res) => {
   //res.redirect('/home')
-
-  
   console.log(req.params.uuidTemp)
-
   console.log(req)
 
 
@@ -115,10 +114,14 @@ router.get('/request',function(req, res){
 
 router.get('/pay/:uuidTemp',function(req, res){
   console.log(req.params)
+  console.log(req.url)
+  console.log(path)
   res.sendFile(path + 'pay.html');
 });
 
 router.get('/css/*', function(req, res) {
+  console.log(req.url)
+  console.log(path)
   res.sendFile(path + req.url)
 })
 

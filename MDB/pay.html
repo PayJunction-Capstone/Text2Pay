@@ -164,7 +164,7 @@
         <!-- Title -->
         <h1 class="card-title" style = "font-size:21px;text-align: center;margin-top: 5px;">Woodstock's Pizza</h1>
         <!-- Text -->
-        <p class="card-text" style = "font-size:16px;text-align: center;margin-top: 25px;">@woodstockspizza requests $23.20 for 16" X-Large Cheese Pizza.</p>
+        <p id="description" class="card-text" style = "font-size:16px;text-align: center;margin-top: 25px;">@woodstockspizza requests $23.20 for 16" X-Large Cheese Pizza.</p>
         <!-- Button -->
         <a id="decline" href="home" class="btn btn-light" style = "left:50%;margin-left:-175px; width:350px;height:65px;font-size:16px;padding-top: 22px;margin-top: 15px;" > No Thanks</a>
         <a id="card" href="#" class="btn btn-light" style = "left:50%;margin-left:-360px; width:350px;height:65px;font-size:14px;padding-top: 37px;margin-top: 15px;display: inline-block;visibility: hidden;">PayJunction balance:<br/><div style="color:#818181;margin-top:10px;font-size:16px">$573.29</div></a>
@@ -190,11 +190,45 @@
   <script type="text/javascript" src="js/bootstrap.min.js"></script>
   <!-- MDB core JavaScript -->
   <script type="text/javascript" src="js/mdb.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
+  <script>
+      var config = {
+        apiKey: "AIzaSyCri31YveE6WMCjfA9UMJH7-NdVU1ZJbu8",
+        authDomain: "payjunction-4be6a.firebaseapp.com",
+        databaseURL: "https://payjunction-4be6a.firebaseio.com",
+        projectId: "payjunction-4be6a",
+        storageBucket: "payjunction-4be6a.appspot.com",
+        messagingSenderId: "199914665361",
+        appId: "1:199914665361:web:1879621121a23682711630",
+        measurementId: "G-L3XRQM049H"
+      };
+      firebase.initializeApp(config);
+    </script>
 </body>
 
 </html>
 
 <script>
+  function getPaymentRequest(paymentRequestID){
+  var db = firebase.firestore();
+  db.collection("paymentRequests").where("PaymentRequestID", "==", paymentRequestID)
+    .get()
+    .then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            // doc.data() is never undefined for query doc snapshots
+            requestData = doc.data();
+            amount = requestData.PaymentAmount;
+            phoneNumber = requestData.PhoneNumber; 
+            console.log("amount: ", amount, "phone number: ", phoneNumber);
+            document.getElementById("description").textContent = "@woodstockspizza requests "+ amount+ " for 16\" X-Large Cheese Pizza."; // person + " requests " + amount + " for " + description;
+        });
+    })
+    .catch(function(error) {
+        console.log("Error getting documents: ", error);
+    });
+}
+getPaymentRequest("4a9037e2-049a-4faf-91a5-2d0f9f112f9e");
 function moveTabs() {
   if (tabsButton.value == "False" || (tabsButton.value!="False" && tabsButton.value!="True")) {
     document.getElementById("mySidenav").style.width = "225px";
@@ -246,7 +280,7 @@ function onBuyClicked() {
       }
   }];
 
-  var val = '23.20'
+  var val = '23.20'//REPLACE WITH AMOUNT FROM GETPAYMENT REQ
 
   // Checkout details
   var details = {
