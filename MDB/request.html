@@ -164,7 +164,7 @@
         <input id="requestDescription" type="text" placeholder="Description" name="uname" required style= "border-radius:5px;width: 80%; padding: 12px 20px; margin: 12px 0; margin-top:8px; display: inline-block; border: 1px solid #ccc; box-sizing: border-box;margin-left: 45px;">
         <!-- Button -->
         <br /> 
-        <a id="pay" href="#" class="btn btn-info" style = "left:50%;margin-left:-175px; width:350px;height:65px;font-size:16px;padding-top: 22px;margin-top:10px" onclick="createRequest()" >Send Request</a>
+        <a id="pay" href="request" class="btn btn-info" style = "left:50%;margin-left:-175px; width:350px;height:65px;font-size:16px;padding-top: 22px;margin-top:10px" onclick="createRequest()" >Send Request</a>
         <a id="return" href="home" class="btn btn-light" style = "left:50%;margin-left:-175px; width:350px;height:65px;font-size:16px;padding-top: 22px;margin-top: -80px;visibility: hidden;"> Return to Home</a>
       </div>
   </div>
@@ -239,8 +239,6 @@ function createRequest(){
   else{
     console.log("invalid input");
   }
-
-  window.location.href = "/home";
 
 }
 
