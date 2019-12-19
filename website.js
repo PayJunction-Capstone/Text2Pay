@@ -1,3 +1,11 @@
+import React, { Component } from 'react';
+import {BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+/*
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+//import * as serviceWorker from './serviceWorker';
+*/
 
 var express = require('express');
 const https = require('https');
@@ -10,6 +18,31 @@ var router = express.Router();
 var jsdom = require('mocha-jsdom');
 global.document = jsdom();
 */
+
+
+
+class website extends Component {
+  render() {
+    return (
+      <React.Fragment>
+        <Router>
+          <Switch>
+            <Route exact path = '/' component={Login}/>
+            <Route path = '/home' component={Home}/>
+            <Route path = '/addinfo' component={AddInfo}/>
+            <Route path = '/pay/:uuidTemp' component={Pay}/>
+            <Route path = '/request' component={Request}/>
+          </Switch>
+        </Router>
+      </React.Fragment>
+    );
+  }
+}
+
+export default website;
+
+/*
+
 
 var path = __dirname + '/MDB/';
 
@@ -29,7 +62,7 @@ router.get('/',function(req, res){
       res.sendFile(path + 'pay.html')
     });
   }
-  */
+  // add * / here
 });
 
 router.get('/addinfo',function(req, res){
@@ -61,7 +94,7 @@ const uuidv4 = require('uuid/v4');
 uuidv4(); // ⇨ '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'
 //curl -X POST -u "pj-ql-01:pj-ql-01p" -H "Accept: application/json" -H "X-PJ-Application-Key: c98a331b-e7a7-4e64-b34c-134bfb406a30"     -d "cardNumber=444433332222111"     -d "cardExpMonth=01"     -d "cardExpYear=2020" -d "cardCvv=999"    -d "amountBase=2.00" "https://api.payjunctionlabs.com/transactions"
 
-
+*/
 
 router.post('/pay/:uuidTemp', (req,res) => {
   //res.redirect('/home')
@@ -111,6 +144,8 @@ router.post('/pay/:uuidTemp', (req,res) => {
   res.sendStatus(200)
 });
 
+/*
+
 router.get('/login',function(req, res){
   res.sendFile(path + 'login.html');
 });
@@ -142,6 +177,7 @@ router.get('/pay/home2',function(req, res){
 router.get('/pay/b55141d8-b954-4940-a2d2-e4297a1c21f1',function(req, res){
   res.sendFile(path + 'pay.html');
 });
+*/
 
 router.get('/css/*', function(req, res) {
   //console.log(req.params)
