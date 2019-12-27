@@ -22,7 +22,7 @@
     "typescript": "^3.7.3"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "nodemon website.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
