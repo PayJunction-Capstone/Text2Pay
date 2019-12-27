@@ -14,7 +14,6 @@ var bodyParser = require('body-parser')
 var app = express();
 var router = express.Router();
 
-/*
 class website extends Component {
   render() {
     return (
@@ -34,7 +33,7 @@ class website extends Component {
 }
 
 export default website;
-*/
+
 
 /*
 var path = __dirname + '/MDB/';
