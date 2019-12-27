@@ -1,3 +1,4 @@
+import express from 'express'
 import React, { Component } from 'react';
 import {BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 /*
@@ -7,20 +8,13 @@ import App from './App';
 //import * as serviceWorker from './serviceWorker';
 */
 
-var express = require('express');
+//var express = require('express');
 const https = require('https');
 var bodyParser = require('body-parser')
 var app = express();
 var router = express.Router();
 
-
-/*var assert = require('assert');
-var jsdom = require('mocha-jsdom');
-global.document = jsdom();
-*/
-
-
-
+/*
 class website extends Component {
   render() {
     return (
@@ -40,10 +34,9 @@ class website extends Component {
 }
 
 export default website;
+*/
 
 /*
-
-
 var path = __dirname + '/MDB/';
 
 app.use(express.json())
@@ -55,14 +48,6 @@ app.use(express.static(path + 'pay.html'));
 
 router.get('/',function(req, res){
   res.sendFile(path + 'login.html');
-
-  /*var button = document.getElementById('payHoward')
-  button.onClick = function(res,req) {
-    router.get('/pay', function(req, res, next) {
-      res.sendFile(path + 'pay.html')
-    });
-  }
-  // add * / here
 });
 
 router.get('/addinfo',function(req, res){

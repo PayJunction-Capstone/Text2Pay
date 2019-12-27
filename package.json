@@ -6,6 +6,7 @@
     "body-parser": "^1.19.0",
     "bootstrap": "^4.3.1",
     "core-js": "^3.6.0",
+    "esm": "^3.2.25",
     "express": "^4.17.1",
     "firebase": "^7.2.3",
     "firebaseui": "^4.2.0",
@@ -22,7 +23,7 @@
     "typescript": "^3.7.3"
   },
   "scripts": {
-    "start": "nodemon website.js",
+    "start": "nodemon -r esm website.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -45,6 +46,9 @@
   "description": "A secure and efficient application that allows consumers and merchants to complete transactions through the consumer's phone, via SMS, email, or QR code, rather than using a credit card terminal.",
   "main": "website.js",
   "devDependencies": {
+    "@babel/core": "^7.7.7",
+    "@babel/preset-env": "^7.7.7",
+    "@babel/register": "^7.7.7",
     "mocha-jsdom": "^2.0.0",
     "nodemon": "^1.19.4"
   },
