@@ -1,6 +1,10 @@
-
 var express = require('express');
 const https = require('https');
+
+const accountSid = 'AC0be21a36ad616556b63e4fb2de58b74f';
+const authToken = '7aed3e119c852ce96f3276611ea3bcbf';
+const twilio = require('twilio')(accountSid, authToken);
+
 var bodyParser = require('body-parser')
 var app = express();
 var router = express.Router();
@@ -15,7 +19,7 @@ var path = __dirname + '/MDB/';
 
 app.use(express.json())
 app.use('/',router);
-app.use(express.static(path + 'pay.html'));
+// app.use(express.static(path + 'pay.html'));
 
 //app.use(bodyParser.json())
 //app.use(bodyParser.urlencoded({ extended: true }))
@@ -57,8 +61,8 @@ router.get('/pay/login',function(req, res){
 });
 
 
-const uuidv4 = require('uuid/v4');
-uuidv4(); // ⇨ '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'
+// const uuidv4 = require('uuid/v4');
+// uuidv4(); // ⇨ '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'
 //curl -X POST -u "pj-ql-01:pj-ql-01p" -H "Accept: application/json" -H "X-PJ-Application-Key: c98a331b-e7a7-4e64-b34c-134bfb406a30"     -d "cardNumber=444433332222111"     -d "cardExpMonth=01"     -d "cardExpYear=2020" -d "cardCvv=999"    -d "amountBase=2.00" "https://api.payjunctionlabs.com/transactions"
 
 

@@ -65,14 +65,7 @@
   <link href="css/mdb.min.css" rel="stylesheet">
   <!-- Your custom styles (optional) -->
   <link href="css/style.css" rel="stylesheet">
-  <script type="text/javascript" src="sendSMS.js"></script>
 </head>
-
-
-
-
-
-
 
 
 
@@ -165,7 +158,7 @@
         <input id="requestDescription" type="text" placeholder="Description" name="uname" required style= "border-radius:5px;width: 80%; padding: 12px 20px; margin: 12px 0; margin-top:8px; display: inline-block; border: 1px solid #ccc; box-sizing: border-box;margin-left: 45px;">
         <!-- Button -->
         <br /> 
-        <a id="pay" href="#" class="btn btn-info" style = "left:50%;margin-left:-175px; width:350px;height:65px;font-size:16px;padding-top: 22px;margin-top:10px" onclick="createRequest()" >Send Request</a>
+        <a id="pay" href="request" class="btn btn-info" style = "left:50%;margin-left:-175px; width:350px;height:65px;font-size:16px;padding-top: 22px;margin-top:10px" onclick="createRequest()" >Send Request</a>
         <a id="return" href="home" class="btn btn-light" style = "left:50%;margin-left:-175px; width:350px;height:65px;font-size:16px;padding-top: 22px;margin-top: -80px;visibility: hidden;"> Return to Home</a>
       </div>
   </div>
@@ -202,6 +195,49 @@
 </html>
 
 <script>
+
+// validatePhone is not working, fails the if condition in createRequest()
+function validatePhone(phone){
+  var re = /[0-9]{10}/;
+  return re.test(String(phone));
+}
+function uuidv4() {
+  uuidTemp = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
+  console.log("uuidTemp: " + uuidTemp);
+  return uuidTemp;
+}
+
+function createRequest(){
+  var db = firebase.firestore()
+  
+  var paymentAmount = document.getElementById("paymentAmount").value;
+  var phoneNumber = document.getElementById("phoneNumber").value;
+  var requestDescription = document.getElementById("requestDescription").value;
+  var paymentRequestID = uuidv4();
+  if(paymentAmount != "" && phoneNumber != "" && paymentRequestID != "" )
+  {
+    console.log('entered if statement');
+    db.collection("paymentRequests").add({
+      PaymentAmount: paymentAmount,
+      PaymentRequestID: paymentRequestID,
+      PhoneNumber: phoneNumber,
+      RequestDescription: requestDescription
+    }).then(function(docRef) {
+        console.log("Document written with ID: ", docRef.id);
+    })
+    .catch(function(error) {
+        console.error("Error adding document: ", error);
+    });
+  }
+  else{
+    console.log("invalid input");
+  }
+
+}
+
 function moveTabs() {
   if (tabsButton.value == "False" || (tabsButton.value!="False" && tabsButton.value!="True")) {
     document.getElementById("mySidenav").style.width = "225px";
@@ -213,82 +249,4 @@ function moveTabs() {
     tabsButton.value = "False";
   }
 }
-function fadeButton(){
-  if(document.getElementById("pay").temp==false)
-  {
-    document.getElementById("pay").textContent ="Payment Complete";
-    document.getElementById("card").style.visibility = "hidden";
-    document.getElementById("pay").style.marginTop = "-200px";
-    document.getElementById("return").style.visibility = "visible";
-  }
-  else{
-    document.getElementById("decline").style.visibility = "hidden";
-    document.getElementById("report").style.visibility = "hidden";
-    document.getElementById("card").style.visibility = "visible";
-    document.getElementById("card").style.height = "125px";
-    document.getElementById("pay").textContent = "Confirm Payment";
-    document.getElementById("pay").className =" btn btn-success";
-    document.getElementById("pay").style.marginLeft = "55px";
-    document.getElementById("pay").temp=false;
-    onBuyClicked()
-  }
-}
-
-function onBuyClicked() {
-  if (!window.PaymentRequest) {
-    // PaymentRequest API is not available. Forwarding to
-    // legacy form based experience.
-    location.href = '/checkout';
-    return;
-  }
-
-  // Supported payment methods
-  var supportedInstruments = [{
-      supportedMethods: ['basic-card'],
-      data: {
-        supportedNetworks: [
-          'visa', 'mastercard', 'amex', 'discover',
-          'diners', 'jcb', 'unionpay'
-        ]
-      }
-  }];
-
-  // Checkout details
-  var details = {
-    total: {
-      label: 'Total due',
-      amount: { currency: 'USD', value : '32.50' }
-    }
-  };
-
-  // 1. Create a `PaymentRequest` instance
-  var request = new PaymentRequest(supportedInstruments, details);
-
-  // 2. Show the native UI with `.show()`
-  request.show()
-  // 3. Process the payment
-  .then(result => {
-    // POST the payment information to the server
-    return fetch('/pay', {
-      method: 'POST',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(result.toJSON())
-    }).then(response => {
-      // 4. Display payment results
-      if (response.status === 200) {
-        // Payment successful
-        return result.complete('success');
-      } else {
-        // Payment failure
-        return result.complete('fail');
-      }
-    }).catch(() => {
-      return result.complete('fail');
-    });
-  });
-}
-//document.querySelector('#start').addEventListener('click', onBuyClicked);
 </script>
