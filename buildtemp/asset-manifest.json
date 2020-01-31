@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/PayJunction-Capstone/Text2Pay/static/css/main.34de6062.chunk.css",
+    "main.js": "/PayJunction-Capstone/Text2Pay/static/js/main.036d4cce.chunk.js",
+    "main.js.map": "/PayJunction-Capstone/Text2Pay/static/js/main.036d4cce.chunk.js.map",
+    "runtime-main.js": "/PayJunction-Capstone/Text2Pay/static/js/runtime-main.0221bda2.js",
+    "runtime-main.js.map": "/PayJunction-Capstone/Text2Pay/static/js/runtime-main.0221bda2.js.map",
+    "static/js/2.ebba0b66.chunk.js": "/PayJunction-Capstone/Text2Pay/static/js/2.ebba0b66.chunk.js",
+    "static/js/2.ebba0b66.chunk.js.map": "/PayJunction-Capstone/Text2Pay/static/js/2.ebba0b66.chunk.js.map",
+    "index.html": "/PayJunction-Capstone/Text2Pay/index.html",
+    "precache-manifest.fbb601515f151f5f457bdba4e77e18d6.js": "/PayJunction-Capstone/Text2Pay/precache-manifest.fbb601515f151f5f457bdba4e77e18d6.js",
+    "service-worker.js": "/PayJunction-Capstone/Text2Pay/service-worker.js",
+    "static/css/main.34de6062.chunk.css.map": "/PayJunction-Capstone/Text2Pay/static/css/main.34de6062.chunk.css.map",
+    "static/js/2.ebba0b66.chunk.js.LICENSE": "/PayJunction-Capstone/Text2Pay/static/js/2.ebba0b66.chunk.js.LICENSE"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.0221bda2.js",
+    "static/js/2.ebba0b66.chunk.js",
+    "static/css/main.34de6062.chunk.css",
+    "static/js/main.036d4cce.chunk.js"
+  ]
+}
