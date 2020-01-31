@@ -43,7 +43,7 @@ router.get('/home',function(req, res){
 
 
 
-router.post('/pay/:uuidTemp', (req,res) => {
+router.post('/incomplete/:uuidTemp', (req,res) => {
   //res.redirect('/home')
   //console.log(req.params.uuidTemp)
   //console.log(req)
