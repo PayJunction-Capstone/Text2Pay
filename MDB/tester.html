@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <title>Gmail Sign In</title>
+
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyC04no7Ge4ku9xQI3bjJknjhUK9W3UuoiE",
+    authDomain: "sb-sign.firebaseapp.com",
+    databaseURL: "https://sb-sign.firebaseio.com",
+    projectId: "sb-sign",
+    storageBucket: "sb-sign.appspot.com",
+    messagingSenderId: "431178337718"
+  };
+firebase.initializeApp(config);
+  function login(){
+    function newLoginHappend(user){
+        if (user){
+            //user has signed in
+            app(user);
+document.getElementById("SignOutButton").style = "display:block";
+document.getElementById("SignInButton").style = "display:none";
+        }
+        else{       }
+    }
+firebase.auth().onAuthStateChanged(newLoginHappend);
+
+
+  }
+  function login2(){
+    function newLoginHappend(user){
+        if (user){
+            //user has signed in
+            app(user);
+document.getElementById("SignOutButton").style = "display:block";
+        }
+        else{
+            var provider = new firebase.auth.GoogleAuthProvider();
+firebase.auth().signInWithRedirect(provider);
+        }
+    }
+firebase.auth().onAuthStateChanged(newLoginHappend);
+  }
+  function app(user){
+  //user.displayName    
+  //user.email
+  //user.photoURL
+  //user.uid
+document.getElementById("ClientName").innerHTML = user.displayName;
+  }
+  window.onload = login();
+</script>
+   </head>
+   <body>
+     <h1>
+         Hello, <span id="ClientName"></span> 
+         </h1>
+         <button id="SignInButton" style="display:block" onclick='login2()'>Sign In</button>    <button id="SignOutButton" style="display:none" onclick='firebase.auth().signOut();location.reload(true);'>Sign Out</button>
+
+   </body>
+</html>
