@@ -10,11 +10,14 @@ import RequestPage from './pages/Request';
 import IncompletePage from './pages/Incomplete';
 import PayPage from "./pages/Pay"
 import AddInfo from "./pages/ExtraInfo"
+import CheckStatus from './components/CheckStatus'
+
 
 class App extends Component{
   render(){
     return (
       <div className="App">
+        <CheckStatus/>
         {/* <NavbarPage /> */}
         <Router>
           <Switch>
