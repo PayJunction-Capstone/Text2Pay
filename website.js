@@ -1,14 +1,19 @@
 var express = require('express');
 const https = require('https');
-
-const accountSid = 'AC0be21a36ad616556b63e4fb2de58b74f';
-const authToken = '7aed3e119c852ce96f3276611ea3bcbf';
-//const twilio = require('twilio')(accountSid, authToken);
-
 var bodyParser = require('body-parser')
+const client = require('twilio')(
+'AC0be21a36ad616556b63e4fb2de58b74f',
+'7aed3e119c852ce96f3276611ea3bcbf'
+);
+
+
+console.log(process.env.TWILIO_ACCOUNT_SID)
 var app = express();
 var router = express.Router();
 
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 /*var assert = require('assert');
 var jsdom = require('mocha-jsdom');
@@ -89,6 +94,23 @@ router.post('/pay/:uuidTemp', (req,res) => {
   req1.write(data1)
   req1.end()
   res.sendStatus(200)
+});
+
+app.post('/request', (req, res) => {
+  res.header('Content-Type', 'application/json');
+  client.messages
+    .create({
+      from: +13213237705,
+      to: +14087999623,
+      body: req.body.body
+    })
+    .then(() => {
+      res.send(JSON.stringify({ success: true }));
+    })
+    .catch(err => {
+      console.log(err);
+      res.send(JSON.stringify({ success: false }));
+    });
 });
 
 router.get('/signup',function(req, res){
