@@ -17,7 +17,7 @@ class Card extends Component {
                         <MDBCardText >
                             {this.props.desc}
                         </MDBCardText> 
-                        <MDBBtn href = "#" color="info" > 
+                        <MDBBtn to="/pay"  color="info" > 
                             Pay ${this.props.cost} 
                         </MDBBtn> 
                     </MDBCardBody> 
