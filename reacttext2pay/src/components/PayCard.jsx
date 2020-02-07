@@ -106,7 +106,22 @@ class PayCard extends Component{
     var currentUUID = window.location.href.substring    (window.location.href.lastIndexOf('/') + 1);
     //gets request information using UUID
     this.getPaymentRequest(currentUUID,this.replaceState);
+    this.getUserEmail();
   }
+  
+  getUserEmail() {
+    let currentComp = this;
+    var email;
+    firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+            email = firebase.auth().currentUser.email;
+            // console.log("seeing if email works")
+            // console.log(email)
+            currentComp.setState({ email: email});
+        }
+    });
+}
+
 
   render(){   
     return(
@@ -119,7 +134,7 @@ class PayCard extends Component{
         </div>
         <div className="card-body" style={{width: "450px",height:"200px"}}>
           <h1 className="card-title" style = {{fontSize:"20px",textAlign: "center",marginTop: "5px"}}>Woodstocks Pizza</h1>
-          <p id="description" className="card-text" style = {{fontSize:"16px",textAlign: "center",marginTop: "18px"}}> Someone requests ${this.state.amount} for {this.state.description}.</p>
+          <p id="description" className="card-text" style = {{fontSize:"16px",textAlign: "center",marginTop: "20px"}}> {this.state.email} requests ${this.state.amount} for {this.state.description}.</p>
           <a id="decline" href="/home" className="btn btn-light" style = {{ width:"300px",height:"60px",fontSize:"16px",paddingTop: "18px",marginTop: "10px"}} > No Thanks</a>
           <br /> 
           <a id="pay" href="#" className="btn btn-info" style = {{ width:"300px",height:"60px",fontSize: "16px", paddingTop: "18px",marginTop: "10px"}} onClick={()=>this.onBuyClicked()} > Pay Now</a>

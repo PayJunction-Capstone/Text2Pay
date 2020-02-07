@@ -10,7 +10,6 @@ class Home extends Component{
   render(){
     return (
       <div >
-        <CheckStatus/>
         <NavbarPage />
         <TablePanel style={{display:"inline-block"}}/>
         <TablePanel style={{display:"inline-block"}}/>
