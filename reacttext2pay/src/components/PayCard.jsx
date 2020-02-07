@@ -47,7 +47,7 @@ class PayCard extends Component{
       //location.href = '/checkout';
       //return;
     }
-  
+  /*
     // Supported payment methods
     var supportedInstruments = [{
         supportedMethods: ['basic-card'],
@@ -68,9 +68,34 @@ class PayCard extends Component{
         amount: { currency: 'USD', value : val }
       }
     };
+    */
   
+    function buildSupportedPaymentMethodData() {
+      // Example supported payment methods:
+      return [{
+        supportedMethods: 'basic-card',
+        data: {
+          supportedNetworks: [
+            'visa', 'mastercard', 'amex', 'discover',
+            'diners', 'jcb', 'unionpay'
+          ],
+          supportedTypes: ['debit', 'credit']
+        }
+      }];
+    }
+    
+    function buildShoppingCartDetails() {
+      // Hardcoded for demo purposes:
+      return {
+        total: {
+          label: 'Total due',
+          amount: { currency: 'USD', value : val }
+        }
+      };
+    }
     // 1. Create a `PaymentRequest` instance
-    var request = new PaymentRequest(supportedInstruments, details);
+    var request = new PaymentRequest(buildSupportedPaymentMethodData(),
+                                 buildShoppingCartDetails());
   
     // 2. Show the native UI with `.show()`
     request.show()
