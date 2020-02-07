@@ -75,7 +75,7 @@ class PayCard extends Component{
     function buildSupportedPaymentMethodData() {
       // Example supported payment methods:
       return [{
-        supportedMethods: 'basic-card',
+        supportedMethods: ['basic-card','https://apple.com/apple-pay'],
         data: {
           supportedNetworks: [
             'visa', 'mastercard', 'amex', 'discover',
