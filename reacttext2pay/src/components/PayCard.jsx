@@ -69,6 +69,8 @@ class PayCard extends Component{
       }
     };
     */
+
+   var val = currentComp.state.amount;//REPLACE WITH AMOUNT FROM GETPAYMENT REQ
   
     function buildSupportedPaymentMethodData() {
       // Example supported payment methods:
