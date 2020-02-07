@@ -80,8 +80,7 @@ class PayCard extends Component{
           supportedNetworks: [
             'visa', 'mastercard', 'amex', 'discover',
             'diners', 'jcb', 'unionpay'
-          ],
-          supportedTypes: ['debit', 'credit']
+          ]
         }
       }];
     }
