@@ -37,6 +37,14 @@ saveInfo(){
     .catch(function(error) {
         console.error("Error adding document: ", error);
     });
+    
+    // connecting firebase with numbers?
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+          firebase.auth().currentUser.phoneNumber = phone;
+          console.log(phone)
+      }
+  });
   }
   else{
     console.log("invalid input");

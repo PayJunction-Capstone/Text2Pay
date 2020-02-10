@@ -21,6 +21,22 @@ signOut(){
     // An error happened.
   });
 }
+componentWillMount(){
+  this.getName();
+}
+
+getName() {
+  let currentComp = this;
+  var name;
+  firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+          name = firebase.auth().currentUser.displayName;
+          console.log("seeing if name works")
+          console.log(name)
+          currentComp.setState({ name: name});
+      }
+  });
+}
 
 render() {
   return (
@@ -62,7 +78,7 @@ render() {
                   <MDBIcon icon="user" />
                 </MDBDropdownToggle>
                 <MDBDropdownMenu className="dropdown-default">
-                  <MDBDropdownItem href="#!">Benjamin Liu</MDBDropdownItem>
+                  <MDBDropdownItem href="#!">{this.state.name}</MDBDropdownItem>
                   <MDBDropdownItem href="#!">Account</MDBDropdownItem>
                   <MDBDropdownItem href="#!">Settings</MDBDropdownItem>
                   <MDBDropdownItem onClick={()=> this.signOut()}>Log Out</MDBDropdownItem>
