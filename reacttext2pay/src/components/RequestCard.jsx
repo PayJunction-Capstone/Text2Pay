@@ -2,6 +2,14 @@ import React, {Component} from 'react';
 import firebase from "firebase";
 
 class RequestCard extends Component{
+  constructor(props){
+    super(props);
+    this.state = {
+      status: "empty",
+      email: "null",
+    }
+  }
+
   uuidv4() {
     var uuidTemp = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
       var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
@@ -12,7 +20,7 @@ class RequestCard extends Component{
   }
   createRequest(){
 
-
+    let currentComp = this;
     var db = firebase.firestore()
 
     var paymentAmount = document.getElementById("paymentAmount").value;
@@ -26,7 +34,9 @@ class RequestCard extends Component{
         PaymentAmount: paymentAmount,
         PhoneNumber: phoneNumber,
         PaymentRequestID: paymentRequestID,
-        RequestDescription: requestDescription
+        RequestDescription: requestDescription,
+        EmailRequestedFrom: currentComp.state.email
+
       }).then(function(docRef) {
           console.log("Document written with ID: ", docRef.id);
       })
@@ -46,11 +56,28 @@ class RequestCard extends Component{
     })
 
   }
+
+  getUserEmail() {
+    let currentComp = this;
+    var email;
+    firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+            email = firebase.auth().currentUser.email;
+            // console.log("seeing if email works")
+            // console.log(email)
+            currentComp.setState({ status: "updated",
+                                   email: email});
+        }
+    });
+  }
+  componentWillMount(){
+    //gets user information
+    this.getUserEmail();
+  }
+
   render(){
       return (
-      <div className="card" style={{width: "500px",height: "500px", left: "50%",marginLeft: "-250px",marginTop:"50px",display: "inline-block"}}>
-
-
+      <div className="card" style={{width: "500px",height: "500px", left: "50%",marginLeft: "-250px",marginTop:"50px",display: "inline-block",visibility: this.state.status == "empty" ? "hidden": "visible"}}>
         <div className="card-body" style={{width: "500px",height: "250px"}} >
 
           <h1 className="card-title" style = {{fontSize:"21px",textAlign: "center",marginTop: "30px"}}>Create Request Link</h1>
