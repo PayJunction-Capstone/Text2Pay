@@ -19,7 +19,7 @@ class RequestCard extends Component{
     var phoneNumber = document.getElementById("phoneNumber").value;
     var requestDescription = document.getElementById("requestDescription").value;
     var paymentRequestID = this.uuidv4();
-    var obj = {body: "thegrandpotato.com/pay/"+paymentRequestID};
+    var obj = {body: "https://www.thegrandpotato.com/pay/"+paymentRequestID};
     if(paymentAmount != "" && phoneNumber != "" && paymentRequestID != "" )
     {
       db.collection("paymentRequests").add({
