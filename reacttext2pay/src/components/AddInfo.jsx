@@ -21,10 +21,13 @@ saveInfo(){
   var lastname=document.getElementById("lastname").value;
   var email=document.getElementById("email").value;
   var phone=document.getElementById("phone").value;
+  var profilePic = document.getElementById("profilePic").value;
+  var merchant = document.getElementById("merchant").checked;
 
   if(username != "" && firstname != "" && lastname != "" && this.validateEmail(email) == true && this.validatePhone(phone) == true)
   {
     db.collection("users").add({
+      Merchant:merchant,
       Username:username,
       FirstName:firstname,
       LastName:lastname,
@@ -37,7 +40,7 @@ saveInfo(){
     .catch(function(error) {
         console.error("Error adding document: ", error);
     });
-    
+
     // connecting firebase with numbers?
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
@@ -57,17 +60,21 @@ render(){
             {/* <div class="imgcontainer">
                 <img src={'./images/payjunction-ecommerce.png'} style={{width: "230.7px", height: "155.3px"}}/>   */}
           <h1 className="card-title" style = {{fontSize:"21px",textAlign: "center",marginTop: "30px"}}>Add Information</h1>
+          Are you a merchant?
+          <input id="merchant" type="checkbox" name="merchantCheck" required style= {{marginLeft: "20px"}}/>
           <input id="username" type="text" placeholder="User ID" name="uname" required style= {{borderRadius: "5px",width: "80%", padding: "12px 20px", margin: "8px 0", marginTop: "8px", display: "inline-block", border: "1px solid #ccc", boxSizing: "border-box"}}/>
           <input id="firstname" type="text" placeholder="First Name" name="fname" required style= {{borderRadius: "5px",width: "80%", padding: "12px 20px", margin: "12px 0", marginTop: "8px", display: "inline-block", border: "1px solid #ccc", boxSizing: "border-box"}}/>
           <input id="lastname" type="text" placeholder="Last Name" name="lname" required style= {{borderRadius: "5px",width: "80%", padding: "12px 20px", margin: "12px 0", marginTop:"8px", display: "inline-block", border: "1px solid #ccc", boxSizing: "border-box"}}/>
           <input id="email" type="text" placeholder="Email Address" name="emailaddr" required style= {{borderRadius: "5px",width: "80%", padding: "12px 20px", margin: "12px 0", marginTop:"8px", display: "inline-block", border: "1px solid #ccc", boxSizing: "border-box"}}/>
           <input id="phone" type="text" placeholder="Mobile Number" name="phonenum" required style= {{borderRadius: "5px",width: "80%", padding: "12px 20px", margin: "12px 0", marginTop:"8px", display: "inline-block", border: "1px solid #ccc", boxSizing: "border-box"}}/>
-          <br /> 
+          <input id="profilePic" type="text" placeholder="Upload Profile Pic" name="profilePicAddress" required style= {{borderRadius: "5px",width: "80%", padding: "12px 20px", margin: "12px 0", marginTop:"8px", display: "inline-block", border: "1px solid #ccc", boxSizing: "border-box"}}/>
+
+          <br />
           <button type="submit" id ="submit" onClick={()=> this.saveInfo()} style= {{borderRadius: "5px", marginTop: "20px"}}>Create Profile</button>
             {/* </div> */}
     </div>
     );
 }
 }
-  
+
 export default AddInfo;
