@@ -97,10 +97,7 @@ class PayCard extends Component{
     const creditCardPaymentMethod = {
       supportedMethods: 'basic-card',
       data: {
-        supportedNetworks: [
-          'visa', 'mastercard', 'amex', 'discover',
-          'diners', 'jcb', 'unionpay'
-        ],
+        supportedNetworks: ['visa', 'mastercard', 'amex'],
         supportedTypes: ['credit', 'debit'],
       },
     };
