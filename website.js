@@ -35,7 +35,7 @@ router.get('/',function(req, res){
 });
 
 router.get('/addinfo',function(req, res){
-  res.sendFile(path + 'addinfo.html');
+  res.sendFile(__dirname + '/reacttext2pay/build/index.html');
 });
 
 router.get('/home',function(req, res){
