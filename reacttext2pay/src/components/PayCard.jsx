@@ -48,6 +48,19 @@ class PayCard extends Component{
       //return;
     }
   /*
+
+      function buildSupportedPaymentMethodData() {
+      // Example supported payment methods:
+      return [{
+        supportedMethods: ['basic-card'],
+        data: {
+          supportedNetworks: [
+            'visa', 'mastercard', 'amex', 'discover',
+            'diners', 'jcb', 'unionpay'
+          ]
+        }
+      }];
+    }
     // Supported payment methods
     var supportedInstruments = [{
         supportedMethods: ['basic-card'],
@@ -68,24 +81,7 @@ class PayCard extends Component{
         amount: { currency: 'USD', value : val }
       }
     };
-    */
-
-   var val = currentComp.state.amount;//REPLACE WITH AMOUNT FROM GETPAYMENT REQ
-  
-    function buildSupportedPaymentMethodData() {
-      // Example supported payment methods:
-      return [{
-        supportedMethods: ['basic-card'],
-        data: {
-          supportedNetworks: [
-            'visa', 'mastercard', 'amex', 'discover',
-            'diners', 'jcb', 'unionpay'
-          ]
-        }
-      }];
-    }
-    
-    function buildShoppingCartDetails() {
+     function buildShoppingCartDetails() {
       // Hardcoded for demo purposes:
       return {
         total: {
@@ -94,9 +90,47 @@ class PayCard extends Component{
         }
       };
     }
+    */
+
+   var val = currentComp.state.amount;//REPLACE WITH AMOUNT FROM GETPAYMENT REQ
+  
+    const creditCardPaymentMethod = {
+      supportedMethods: 'basic-card',
+      data: {
+        supportedNetworks: [
+          'visa', 'mastercard', 'amex', 'discover',
+          'diners', 'jcb', 'unionpay'
+        ],
+        supportedTypes: ['credit', 'debit'],
+      },
+    };
+
+
+    const applePayMethod = {
+      supportedMethods: "https://apple.com/apple-pay",
+      data: {
+          version: 3,
+          merchantIdentifier: "merchant.com.example",
+          merchantCapabilities: ["supports3DS", "supportsCredit", "supportsDebit"],
+          supportedNetworks: ["amex", "discover", "masterCard", "visa"],
+          countryCode: "US",
+      },
+    };
+    
+    const paymentDetails = {
+      total: {
+        label: 'Total due',
+        amount: { currency: 'USD', value : val }
+      }
+    };
+
+    const supportedPaymentMethods = [
+      creditCardPaymentMethod,
+      applePayMethod
+    ];
+   
     // 1. Create a `PaymentRequest` instance
-    var request = new PaymentRequest(buildSupportedPaymentMethodData(),
-                                 buildShoppingCartDetails());
+    var request = new PaymentRequest(supportedPaymentMethods,paymentDetails);
   
     // 2. Show the native UI with `.show()`
     request.show()
