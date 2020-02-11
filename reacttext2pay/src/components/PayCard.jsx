@@ -11,6 +11,10 @@ class PayCard extends Component{
       amount: "00.00",
       phoneNumber: "123456789",
       description: "null" ,
+      email: "null",
+      user: "null",
+      requesterNumber: "123456789",
+      onPhone: "false"
     }
   }
   getPaymentRequest(paymentRequestID,replaceState){
@@ -25,17 +29,21 @@ class PayCard extends Component{
               var tempAmount = requestData.PaymentAmount;
               var tempPhoneNumber = requestData.PhoneNumber;
               var tempDescription = requestData.RequestDescription;
+              var tempRequestedByEmail = requestData.EmailRequestedFrom;
               currentComp.setState({
-                status: "updated",
+                status: "loading",
                 amount: tempAmount,
                 phoneNumber: tempPhoneNumber,
                 description: tempDescription,
+                email: tempRequestedByEmail
               });
           });
       })
       .catch(function(error) {
           console.log("Error getting documents: ", error);
       });
+    
+    
   }
 
   onBuyClicked() {
@@ -163,9 +171,9 @@ class PayCard extends Component{
     var currentUUID = window.location.href.substring    (window.location.href.lastIndexOf('/') + 1);
     //gets request information using UUID
     this.getPaymentRequest(currentUUID,this.replaceState);
-    this.getUserEmail();
+    //this.getUserEmail();
   }
-  
+  /*
   getUserEmail() {
     let currentComp = this;
     var email;
@@ -177,24 +185,52 @@ class PayCard extends Component{
             currentComp.setState({ email: email});
         }
     });
-}
+  }
+  */
+ getUserInfo(tempEmail){
+  let currentComp = this;
+  console.log(tempEmail);
+  var db2 = firebase.firestore();
+  db2.collection("users").where("Email", "==", tempEmail)
+  .get()
+  .then(function(querySnapshot) {
+      querySnapshot.forEach(function(doc) {
+          // doc.data() is never undefined for query doc snapshots
+          var requestData = doc.data();
+          var tempUsername = requestData.Username;
+          var tempUserPhoneNumber = requestData.PhoneNumber;
+          currentComp.setState({
+            status: "updated",
+            user: tempUsername,
+            requesterNumber: tempUserPhoneNumber
+          });
+      });
+  })
+  .catch(function(error) {
+      console.log("Error getting documents: ", error);
+  });
+ }
 
 
   render(){   
+    console.log(this.state.status)
+    if(this.state.status=="loading"){
+      this.getUserInfo(this.state.email)
+    }
     return(
-      <div className="card" style={{width:"450px",height:"525px", marginTop:"40px",display: "inline-block", visibility: this.state.status == "empty" ? "hidden": "visible"}}>
+      <div className="card" style={{width: "420px",height:"525px", marginTop:"40px",display: "inline-block", visibility: this.state.status == "empty" ? "hidden": "visible"}}>
         <div className="view overlay" >
           <img class="card-img-top" src={Woodstocks} alt="Card image cap"style={{display: "inline-block", width:"125px",height:"125px",borderRadius:"75px",marginTop:"40px"}}></img>
           <a href="#!">
             <div className="mask rgba-white-slight"></div>
           </a>
         </div>
-        <div className="card-body" style={{width: "450px",height:"200px"}}>
-          <h1 className="card-title" style = {{fontSize:"20px",textAlign: "center",marginTop: "5px"}}>Woodstocks Pizza</h1>
+        <div className="card-body" style={{width: "425px",height:"200px"}}>
+          <h1 className="card-title" style = {{fontSize:"20px",textAlign: "center",marginTop: "5px"}}>{this.state.user}</h1>
           <p id="description" className="card-text" style = {{fontSize:"16px",textAlign: "center",marginTop: "20px"}}> {this.state.email} requests ${this.state.amount} for {this.state.description}.</p>
-          <a id="decline" href="/home" className="btn btn-light" style = {{ width:"300px",height:"60px",fontSize:"16px",paddingTop: "18px",marginTop: "10px"}} > No Thanks</a>
+          <a id="decline" href="/home" className="btn btn-light" style = {{ width:"280px",height:"60px",fontSize:"16px",paddingTop: "18px",marginTop: "10px"}} > No Thanks</a>
           <br /> 
-          <a id="pay" href="#" className="btn btn-info" style = {{ width:"300px",height:"60px",fontSize: "16px", paddingTop: "18px",marginTop: "10px"}} onClick={()=>this.onBuyClicked()} > Pay Now</a>
+          <a id="pay" href="#" className="btn btn-info" style = {{ width:"280px",height:"60px",fontSize: "16px", paddingTop: "18px",marginTop: "10px"}} onClick={()=>this.onBuyClicked()} > Pay Now</a>
           <br />
           <p id="report" className="card-text" style = {{fontSize: "14px",textAlign: "center",marginTop: "15px"}}>Think there was a mistake?  
             <a href="#" className="link" style = {{width:"250px",height:"35px",fontSize:"14px"}}> Report your error

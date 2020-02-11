@@ -1,43 +1,78 @@
 import React, {Component} from 'react';
+import firebase from "firebase";
 import Card from '../components/Card';
 import NavbarPage from '../components/NavBarPage'
 
 
 class Incomplete extends Component{
-  
+  constructor(props){
+    super(props);
+    this.state = {
+      status: "empty",
+      email: "null",
+      incompleteList: []
+    }
+  }
+  getUserEmail() {
+    let currentComp = this;
+    var email;
+    firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+            email = firebase.auth().currentUser.email;
+            currentComp.setState({ status: "loading",
+                                   email: email});
+        }
+    });
+  }
+  getIncompleteRequests(){
+    let currentComp = this;
+    var db = firebase.firestore();
+
+    var incompleteListTemp = []
+    console.log(this.state.email)
+    db.collection("paymentRequests").where("EmailRequestedFrom", "==", currentComp.state.email)
+      .get()
+      .then(function(querySnapshot) {
+          querySnapshot.forEach(function(doc) {
+              // doc.data() is never undefined for query doc snapshots
+              var requestData = doc.data();
+              var tempAmount = requestData.PaymentAmount;
+              var tempPhoneNumber = requestData.PhoneNumber;
+              var tempDescription = requestData.RequestDescription;
+              console.log(tempAmount)
+              incompleteListTemp.push(
+                {title: tempPhoneNumber,
+                cost: tempAmount,
+                description: tempDescription
+                });
+              console.log(incompleteListTemp)
+          });
+          currentComp.setState({
+            status: "updated",
+            incompleteList: incompleteListTemp,
+          });
+      })
+      .catch(function(error) {
+          console.log("Error getting documents: ", error);
+      }); 
+      
+      //console.log(this.state.incompleteList);
+
+  }
+
+  componentWillMount(){
+    this.getUserEmail()
+  }
 
   render(){
-    const incompleteList = [
-      {
-          title: "Dominos",
-          cost: "14.38",
-          description: "Pasta & Wings",
-          imgUrl: "https://upload.wikimedia.org/wikipedia/en/e/ed/Leonardo_%28Teenage_Mutant_Ninja_Turtles%29.jpg"
-      },
-      {
-        title: "Pizza Hut",
-        cost: "15.24",
-        description: "Cheese sticks and Pizza",
-        imgUrl: "https://upload.wikimedia.org/wikipedia/en/e/ed/Leonardo_%28Teenage_Mutant_Ninja_Turtles%29.jpg"
-      },
-      {
-        title: "Freebirds",
-        cost: "12.99",
-        description: "Steak burrito and Hornitos",
-        imgUrl: "https://upload.wikimedia.org/wikipedia/en/e/ed/Leonardo_%28Teenage_Mutant_Ninja_Turtles%29.jpg"
-      },
-      {
-        title: "Hana Kitchen",
-        cost: "9.99",
-        description: "Large Chicken Bowl & Boba",
-        imgUrl: "https://upload.wikimedia.org/wikipedia/en/e/ed/Leonardo_%28Teenage_Mutant_Ninja_Turtles%29.jpg"
-      },
-    ]
+    if(this.state.status=="loading"){
+      this.getIncompleteRequests()
+    }
     return (
       <div>
         <NavbarPage/>
-        <div className='homeRow'>
-          {incompleteList.map((incCard, index) =>
+        <div style={{display:"inline-block"}}>
+          {this.state.incompleteList.map((incCard, index) =>
             <Card title={incCard.title} cost={incCard.cost} 
             desc={incCard.description} image={incCard.imgUrl}/> 
           )}
