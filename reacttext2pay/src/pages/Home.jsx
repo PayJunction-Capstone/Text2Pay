@@ -13,7 +13,6 @@ class Home extends Component{
         <CheckStatus />
         <NavbarPage />
         <TablePanel style={{display:"inline-block"}}/>
-        <TablePanel style={{display:"inline-block"}}/>
       </div>  
     );
   }
