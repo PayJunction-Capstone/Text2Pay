@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import firebase from "firebase";
-//var React = require('react');
 var QRCode = require('qrcode.react');
 
 class RequestCard extends Component{
