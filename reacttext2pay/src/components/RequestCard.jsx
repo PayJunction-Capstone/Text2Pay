@@ -26,6 +26,7 @@ class RequestCard extends Component{
     var db = firebase.firestore()
 
     var paymentAmount = document.getElementById("paymentAmount").value;
+    var amountList = [paymentAmount];
     var phoneNumber = document.getElementById("phoneNumber").value;
     var requestDescription = document.getElementById("requestDescription").value;
     var paymentRequestID = this.uuidv4();
@@ -34,6 +35,7 @@ class RequestCard extends Component{
     {
       db.collection("paymentRequests").add({
         PaymentAmount: paymentAmount,
+        AmountList: amountList,
         PhoneNumber: phoneNumber,
         PaymentRequestID: paymentRequestID,
         RequestDescription: requestDescription,
