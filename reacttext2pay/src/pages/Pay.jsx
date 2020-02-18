@@ -61,7 +61,6 @@ class Home extends Component{
   }
   getUserInfo(tempEmail){
     let currentComp = this;
-    console.log(tempEmail);
     var db2 = firebase.firestore();
     db2.collection("users").where("Email", "==", tempEmail)
     .get()
@@ -93,6 +92,7 @@ class Home extends Component{
   }
 
   render(){
+    console.log(this.state.amountList);
     return (
       <div style={{textAlign: "center"}}>
         <NavbarPage/>
@@ -100,7 +100,7 @@ class Home extends Component{
         <div style={{display:"inline-block"}}>
 
           {this.state.amountList.map((eachSplitCard, index) =>
-            <SplitCard payComp={this} cardIndex={index} amount={this.state.amountList[index]}/> 
+            <SplitCard payComp={this} cardIndex={index} amount={this.state.amountList[index]["amount"]} completed={this.state.amountList[index]["complete"]}/> 
           )}
           <QRCode style={{width: "250px", height: "250px", marginTop: "40px"}} value="20"/>
         </div>
