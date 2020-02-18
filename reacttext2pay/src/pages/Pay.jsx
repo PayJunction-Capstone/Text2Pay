@@ -8,10 +8,11 @@ import NavbarPage from '../components/NavBarPage'
 import PayHeader from '../components/PayHeader'
 import SplitCard from '../components/SplitCard'
 
-const functions = require("firebase-functions");
-const admin = require("firebase-admin");
+//const functions = require("firebase-functions");
+//const admin = require("firebase-admin");
 var QRCode = require('qrcode.react');
 
+//admin.initializeApp(functions.config().firebase);
 
 class Home extends Component{
   constructor(props){
@@ -101,12 +102,21 @@ class Home extends Component{
           {this.state.amountList.map((eachSplitCard, index) =>
             <SplitCard payComp={this} cardIndex={index} amount={this.state.amountList[index]}/> 
           )}
-          <QRCode style={{width: "200px", height: "200px", marginTop: "40px"}} value="20"/>
+          <QRCode style={{width: "250px", height: "250px", marginTop: "40px"}} value="20"/>
         </div>
       </div>
     );
   }
 }
+
+// exports.foo = functions.database.ref('/paymentRequests/VkzrpEURLIAajjpBJjgl')
+// .onUpdate((change) => {
+//     const before = change.before  // DataSnapshot before the change
+//     const after = change.after  // DataSnapshot after the change
+//     console.log("AFTERPING")
+//     console.log(after)
+    
+// })
 
 export default Home;
 
