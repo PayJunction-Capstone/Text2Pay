@@ -17,7 +17,7 @@ class RequestCard extends Component{
       var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
       return v.toString(16);
     });
-    console.log("uuidTemp: " + uuidTemp);
+    //console.log("uuidTemp: " + uuidTemp);
     return uuidTemp;
   }
   createRequest(){
@@ -26,6 +26,7 @@ class RequestCard extends Component{
     var db = firebase.firestore()
 
     var paymentAmount = document.getElementById("paymentAmount").value;
+    var amountList = [{complete:false, amount:paymentAmount}];
     var phoneNumber = document.getElementById("phoneNumber").value;
     var requestDescription = document.getElementById("requestDescription").value;
     var paymentRequestID = this.uuidv4();
@@ -34,6 +35,7 @@ class RequestCard extends Component{
     {
       db.collection("paymentRequests").add({
         PaymentAmount: paymentAmount,
+        AmountList: amountList,
         PhoneNumber: phoneNumber,
         PaymentRequestID: paymentRequestID,
         RequestDescription: requestDescription,

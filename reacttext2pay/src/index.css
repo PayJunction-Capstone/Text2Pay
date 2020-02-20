@@ -49,3 +49,9 @@ button:hover {
   margin-right: auto;
   width: 8em
 }
+
+.payqr {
+  width: 500px;
+  height: 500px;
+  margin-top: 40px;
+}
