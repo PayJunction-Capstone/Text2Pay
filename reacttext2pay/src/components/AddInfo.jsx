@@ -14,6 +14,19 @@ class AddInfo extends Component {
     return re.test(String(phone));
   }
 
+  uuidv4() {
+    var uuidTemp = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
+      /[xy]/g,
+      function(c) {
+        var r = (Math.random() * 16) | 0,
+          v = c == "x" ? r : (r & 0x3) | 0x8;
+        return v.toString(16);
+      }
+    );
+    //console.log("uuidTemp: " + uuidTemp);
+    return uuidTemp;
+  }
+
   saveInfo() {
     var db = firebase.firestore();
     var username = document.getElementById("username").value;
@@ -23,6 +36,7 @@ class AddInfo extends Component {
     var phone = document.getElementById("phone").value;
     var merchant = document.getElementById("merchant").checked;
     var fileButton = document.getElementById("fileButton");
+    var qrcode = this.uuidv4();
 
     var file = fileButton.files[0];
     var fileName = file.name;
@@ -45,7 +59,8 @@ class AddInfo extends Component {
           LastName: lastname,
           Email: email,
           PhoneNumber: phone,
-          ProfilePic: path
+          ProfilePic: path,
+          QRCode: qrcode
         })
         .then(function(docRef) {
           console.log("Document written with ID: ", docRef.id);
