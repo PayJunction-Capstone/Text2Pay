@@ -14,23 +14,23 @@ const TablePanel = (props) => {
       },
       {
         "1": "Hana Kitchen charged $6.20",
-        "2": "BEEEF BOOWL BOIII"
+        "2": "Large Beef Bowl"
       },
       {
-        "1": "Albertsons charged $21.39",
-        "2": "Ciroc"
+        "1": "Woodstocks charged $21.39",
+        "2": "Large Pepperoni Pizza"
       },
       {
-        "1": "Albertsons charged $21.39",
-        "2": "Another Ciroc"
+        "1": "Woodstocks charged $22.54",
+        "2": "Large Combination Pizza"
       },
       {
-        "1": "Albertsons charged $21.39",
-        "2": "Another one..."
+        "1": "Woodstocks charged $8.50",
+        "2": "Medium Cinnabread."
       },
       {
-        "1": "Albertsons charged $21.39",
-        "2": "Oh boy"
+        "1": "Woodstocks charged $7.39",
+        "2": "Small Salad w/ Ranch Dressing"
       }
     ]
   };
