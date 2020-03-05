@@ -17,7 +17,6 @@ class SplitCard extends Component{
   onBuyClicked() {
     let currentComp = this;
     var currentUUID = window.location.href.substring
-    console.log("INSIDE")
     if (!window.PaymentRequest) {
       // PaymentRequest API is not available. Forwarding to
       // legacy form based experience.
@@ -66,7 +65,6 @@ class SplitCard extends Component{
     request.show()
     // 3. Process the payment
     .then(result => {
-      console.log('result is: ' , result)
       // POST the payment information to the server
       return fetch('/pay/'+currentUUID, {
         method: 'POST',
@@ -101,7 +99,6 @@ class SplitCard extends Component{
     if(this.state.splitMethod=="Quantity"){
       var dividedAmount = parseFloat(tempArray[this.props.cardIndex]["amount"])/newValue;
       dividedAmount= (Math.floor(dividedAmount*100))/100;
-      console.log(dividedAmount);
       var i;
       for (i = 0; i < newValue-1; i++) {
         tempArray[this.props.cardIndex]["amount"] = (parseFloat(tempArray[this.props.cardIndex]["amount"])- dividedAmount).toFixed(2);
@@ -112,7 +109,6 @@ class SplitCard extends Component{
       tempArray[this.props.cardIndex]["amount"] = tempValue.toFixed(2)
       tempArray.push({complete:false,amount:newValue})
     }
-    console.log("ARRAY IS :"+ tempArray);
     db.collection("paymentRequests").where("PaymentRequestID", "==", currentComp.props.payComp.state.uuid)
       .get()
       .then(function(querySnapshot) {
@@ -133,7 +129,6 @@ class SplitCard extends Component{
   }
 
   updateFieldComplete(){
-    console.log("INSIDE UPDATE COMPLETE");
     let currentComp = this;
     var tempArray = this.props.payComp.state.amountList
     tempArray[this.props.cardIndex]["complete"]= true;
@@ -151,7 +146,6 @@ class SplitCard extends Component{
               status: "complete",
               value: ""
           });
-          console.log("MADE IT");
         });
     })
     .catch(function(error) {
@@ -169,7 +163,6 @@ class SplitCard extends Component{
     if(this.state.status=="loading"){
       this.getUserInfo(this.state.email)
     }
-    console.log("amount is: "+ this.props.amount);
     return(
       <div>
         <div className="card" 

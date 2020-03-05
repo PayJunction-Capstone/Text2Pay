@@ -12,11 +12,13 @@ import SplitCard from '../components/SplitCard'
 //const admin = require("firebase-admin");
 var QRCode = require('qrcode.react');
 
+
 //admin.initializeApp(functions.config().firebase);
 
 class Home extends Component{
   constructor(props){
     super(props);
+
     this.state = {
       status: "empty",
       uuid:"",
@@ -45,6 +47,8 @@ class Home extends Component{
               var tempPhoneNumber = requestData.PhoneNumber;
               var tempDescription = requestData.RequestDescription;
               var tempRequestedByEmail = requestData.EmailRequestedFrom;
+              currentComp.tempID = doc.id
+              console.log(currentComp.tempID);
               currentComp.setState({
                 status: "loading",
                 amount: tempAmount,
@@ -69,6 +73,7 @@ class Home extends Component{
         var requestData = doc.data();
         var tempUsername = requestData.Username;
         var tempUserPhoneNumber = requestData.PhoneNumber;
+        
         currentComp.setState({
           status: "updated",
           user: tempUsername,
@@ -81,6 +86,19 @@ class Home extends Component{
     });
   }
 
+
+  getRealTimeUpdates = function() {
+    let currentComp = this;
+    console.log("inhere")
+    this.docRef.onSnapshot(function(doc){
+      if(doc && doc.exists){
+        const myData = doc.data();
+        console.log(doc);
+        var tempAmountList = myData.AmountList;
+        currentComp.setState({amountList: tempAmountList});
+      }
+    });
+  }
   componentWillMount(){
     let thisComp= this;
     var currentUUID = window.location.href.substring    (window.location.href.lastIndexOf('/') + 1);
@@ -89,10 +107,16 @@ class Home extends Component{
       url: "https://www.thegrandpotato.com/pay/"+currentUUID
     });
     this.getPaymentRequest(currentUUID,this.replaceState);
+    setTimeout(() => {
+      var tempDocID = "paymentRequests/"+this.tempID;
+      console.log(tempDocID);
+      this.docRef = firebase.firestore().doc(tempDocID);
+      this.getRealTimeUpdates();
+    }, 1200);
+    
   }
 
   render(){
-    console.log(this.state.amountList);
     return (
       <div style={{textAlign: "center"}}>  
         <PayHeader/> 
