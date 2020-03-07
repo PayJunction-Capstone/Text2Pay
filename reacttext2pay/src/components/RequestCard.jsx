@@ -110,14 +110,14 @@ class RequestCard extends Component{
           <input id="phoneNumber" type="text" placeholder="Phone Number" name="uname" required style= {{borderRadius: "5px",width: "80%", padding: "12px 20px", margin: "12px 0", marginTop: "8px", display: "inline-block", border: "1px solid #ccc", boxSizing: "border-box", visibility: this.state.status == "requested" ? "hidden": "visible"}}/>
           <input id="requestDescription" type="text" placeholder="Description" name="uname" required style= {{borderRadius: "5px",width: "80%", padding: "12px 20px", margin: "12px 0", marginTop:"8px", display: "inline-block", border: "1px solid #ccc", boxSizing: "border-box", visibility: this.state.status == "requested" ? "hidden": "visible"}}/>
           <label style={{color: 'dimgray', fontSize:"16px", paddingRight:"15px",marginTop: "10px", display: "inline-block", visibility: this.state.status == "requested" ? "hidden": "visible"}}> Is this a reccuring payment?</label> 
-          <select required style={{color: 'dimgray', visibility: this.state.status == "requested" ? "hidden": "visible"}}>
+          <select required style={{color: 'dimgray', display: "inline-block", visibility: this.state.status == "requested" ? "hidden": "visible"}}>
             <option selected value="None">None</option>
             <option value="Daily">Daily</option>
             <option value="Weekly">Weekly</option>
             <option value="Monthly">Monthly</option>
             <option value="Annually">Annually</option>
           </select>
-          <QRCode value={this.state.requestLink} style = {{width:"225px",height:"225px",marginTop: "-320px", visibility: this.state.status == "requested" ? "visible": "hidden"}} />
+          <QRCode value={this.state.requestLink} style = {{width:"225px",height:"225px", marginTop: "-520px", marginBottom: "25px", visibility: this.state.status == "requested" ? "visible": "hidden"}} />
           <br />
           <a  id="pay"  className="btn btn-info" style = {{ width: "350px",height: "65px",fontSize: "16px",paddingTop: "22px",marginTop:"0px", visibility: this.state.status == "requested" ? "hidden": "visible"}} onClick={()=> this.createRequest()} >Send Request</a>
           <a id="return" className="btn btn-light" style = {{color: "black",width:"350px",height:"65px",fontSize:"16px",paddingTop: "22px",marginTop: "-79px", visibility: this.state.status == "requested" ? "visible": "hidden"}} onClick={()=> this.resetState()}>Create New Request</a>
