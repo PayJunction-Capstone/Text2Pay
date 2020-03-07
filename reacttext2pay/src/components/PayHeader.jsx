@@ -98,7 +98,7 @@ class PayHeader extends Component {
     }
     if (this.state.email == "julialiu@ucsb.edu") image = Blaze;
     if (this.state.email == "julia.zihan.liu@gmail.com") image = Dentist;
-    if (this.state.email == "eighteightpianokeys@gmail.com") image = Edison;
+    if (this.state.email == "eightyeightpianokeys@gmail.com") image = Edison;
     console.log(this.state.email);
     return (
       <div>
