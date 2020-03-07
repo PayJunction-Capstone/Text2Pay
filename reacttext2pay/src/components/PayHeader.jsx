@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import Woodstocks from "../images/default.png";
+import Dentist from "../images/dentist.png";
+import Blaze from "../images/blaze.png";
+import Edison from "../images/edison.png";
 import firebase from "firebase";
 
 var QRCode = require("qrcode.react");
@@ -87,14 +89,18 @@ class PayHeader extends Component {
   }
 
   render() {
+    var image;
     if (this.state.status == "loading") {
       this.getUserInfo(this.state.email);
+      if (this.state.email == "julialiu@ucsb.edu") image = Blaze;
+      if (this.state.email == "julia.zihan.liu@gmail.com") image = Dentist;
+      if (this.state.email == "eighteightpianokeys@gmail.com") image = Edison;
     }
     return (
       <div>
         <img
           class="card-img-top"
-          src={Woodstocks}
+          src={image}
           alt="Card image cap"
           style={{
             width: "100px",
