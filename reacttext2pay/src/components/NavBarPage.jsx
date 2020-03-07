@@ -77,11 +77,11 @@ render() {
                 <MDBDropdownToggle nav caret>
                   <MDBIcon icon="user" />
                 </MDBDropdownToggle>
-                <MDBDropdownMenu className="dropdown-default">
+                <MDBDropdownMenu right basic className="dropdown-default">
                   <MDBDropdownItem href="#!">{this.state.name}</MDBDropdownItem>
                   <MDBDropdownItem href="#!">Account</MDBDropdownItem>
                   <MDBDropdownItem href="#!">Settings</MDBDropdownItem>
-                  <MDBDropdownItem onClick={()=> this.signOut()}>Log Out</MDBDropdownItem>
+                  <MDBDropdownItem href="#" onClick={()=> this.signOut()}>Log Out</MDBDropdownItem>
                 </MDBDropdownMenu>
               </MDBDropdown>
             </MDBNavItem>
