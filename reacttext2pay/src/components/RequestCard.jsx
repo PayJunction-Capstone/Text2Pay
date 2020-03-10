@@ -45,7 +45,10 @@ class RequestCard extends Component {
           PhoneNumber: phoneNumber,
           PaymentRequestID: paymentRequestID,
           RequestDescription: requestDescription,
-          EmailRequestedFrom: currentComp.state.email
+          EmailRequestedFrom: currentComp.state.email,
+          Completed: false,
+          RequestTimeStamp: Date.now(),
+          CompletedTimeStamp: null
         })
         .then(function(docRef) {
           console.log("Document written with ID: ", docRef.id);

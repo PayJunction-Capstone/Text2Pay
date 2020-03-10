@@ -133,14 +133,29 @@ class SplitCard extends Component{
     var tempArray = this.props.payComp.state.amountList
     tempArray[this.props.cardIndex]["complete"]= true;
 
+    this.isComplete = true;
+    for (var i = 0; i < tempArray.length; i++) {
+      if(tempArray[i]["complete"]==false){
+        currentComp.isComplete = false;
+      }
+    }
+
     var db = firebase.firestore();
     db.collection("paymentRequests").where("PaymentRequestID", "==", currentComp.props.payComp.state.uuid)
       .get()
       .then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
-            db.collection("paymentRequests").doc(doc.id).update({
-              AmountList:tempArray
-            });
+            if(currentComp.isComplete == false){
+              db.collection("paymentRequests").doc(doc.id).update({
+                AmountList:tempArray
+              });
+            }else{
+              db.collection("paymentRequests").doc(doc.id).update({
+                AmountList:tempArray,
+                Completed: true,
+                CompletedTimeStamp: Date.now()
+              });
+            }
             currentComp.props.payComp.getPaymentRequest(currentComp.props.payComp.state.uuid,currentComp.props.payComp.replaceState);
             currentComp.setState({
               status: "complete",

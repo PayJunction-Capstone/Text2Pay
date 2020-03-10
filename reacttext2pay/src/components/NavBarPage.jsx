@@ -31,8 +31,6 @@ getName() {
   firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
           name = firebase.auth().currentUser.displayName;
-          console.log("seeing if name works")
-          console.log(name)
           currentComp.setState({ name: name});
       }
   });

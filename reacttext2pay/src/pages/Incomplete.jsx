@@ -36,16 +36,18 @@ class Incomplete extends Component{
           querySnapshot.forEach(function(doc) {
               // doc.data() is never undefined for query doc snapshots
               var requestData = doc.data();
-              var tempAmount = requestData.PaymentAmount;
-              var tempPhoneNumber = requestData.PhoneNumber;
-              var tempDescription = requestData.RequestDescription;
-              console.log(tempAmount)
-              incompleteListTemp.push(
-                {title: tempPhoneNumber,
-                cost: tempAmount,
-                description: tempDescription
+              var tempCompleted = requestData.Completed;
+              if(tempCompleted == false){
+                var tempAmount = requestData.PaymentAmount;
+                var tempPhoneNumber = requestData.PhoneNumber;
+                var tempDescription = requestData.RequestDescription;
+                console.log(tempAmount)
+                incompleteListTemp.push(
+                  {title: tempPhoneNumber,
+                  cost: tempAmount,
+                  description: tempDescription
                 });
-              console.log(incompleteListTemp)
+              }
           });
           currentComp.setState({
             status: "updated",
